@@ -1,4 +1,4 @@
-# BlitzCode100
+# Blitz-Code-100
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.14.
 
