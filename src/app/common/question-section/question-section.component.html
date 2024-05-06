@@ -1,0 +1,73 @@
+<div class="d-flex justify-content-between py-4">
+  <div><h3 class="text-primary">Array</h3></div>
+  <div></div>
+
+  <div>
+    <div class="progress-container me-2">
+      <mat-progress-spinner
+        class="progress"
+        color="primary"
+        mode="determinate"
+        [diameter]="45"
+        [value]="75"
+      ></mat-progress-spinner>
+      <span class="label"> 40% </span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <table class="container table table-striped rounded px-4">
+    <thead>
+      <tr>
+        <th scope="col">Status</th>
+        <th scope="col">LeetCode</th>
+        <th scope="col">Title</th>
+        <th scope="col">Difficulty</th>
+        <th scope="col">Star</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data">
+        <td *ngFor="let col of tableColumns">
+          <ng-container *ngIf="col.value === 'status'">
+            <mat-checkbox></mat-checkbox>
+          </ng-container>
+          <ng-container *ngIf="col.value !== 'status'">
+            {{ row[col.value] }}
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 
+<ngb-accordion>
+  <ngb-panel>
+    <ng-template ngbPanelTitle>
+      
+      <b class="mx-3"> Array </b>
+      <span class="mx-2 border px-2 rounded"> <small>4/6</small> </span>
+    </ng-template>
+    <ng-template ngbPanelContent>
+      <table class="table table-striped">
+        <tbody>
+          <tr *ngFor="let row of data">
+            <td *ngFor="let col of tableColumns">
+              <ng-container *ngIf="col.value === 'status'">
+                <mat-checkbox></mat-checkbox>
+              </ng-container>
+              <ng-container *ngIf="col.value !== 'status'">
+                {{ row[col.value] }}
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion> -->
+<!-- <span>&#9733; <b>Fancy</b> title &#9734;</span> -->
+
+<br />

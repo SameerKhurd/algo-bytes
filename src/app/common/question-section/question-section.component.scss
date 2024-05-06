@@ -1,0 +1,22 @@
+.progress-container {
+  padding: 8px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .progress {
+    position: absolute;
+    background-color: transparent;
+    box-shadow: none;
+  }
+  .label {
+    z-index: 1;
+    font-size: small;
+  }
+}
+
+.text-primary {
+    --bs-text-opacity: 0.5
+    ;
+    color: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
+  }
