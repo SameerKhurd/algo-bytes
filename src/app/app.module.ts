@@ -23,6 +23,7 @@ import { QuestionTableComponent } from './common/question-table/question-table.c
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRippleModule } from '@angular/material/core';
 
 // Services
 import { ThemeService } from './services/theme.service';
@@ -54,6 +55,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatCheckboxModule,
+    MatRippleModule,
     NgbModule,
   ],
   providers: [ThemeService],

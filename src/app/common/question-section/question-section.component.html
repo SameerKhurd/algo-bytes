@@ -1,40 +1,76 @@
-<div class="d-flex justify-content-between py-4">
-  <div><h3 class="text-primary">Array</h3></div>
+<div class="d-flex justify-content-between py-2 pb-3">
+  <div><h3 class="text-sprimary my-auto">Array</h3></div>
   <div></div>
 
-  <div>
-    <div class="progress-container me-2">
+  <div class="d-flex flex-row-reverse p-2">
+    <div class="progress-container mx-2">
       <mat-progress-spinner
         class="progress"
         color="primary"
         mode="determinate"
         [diameter]="45"
-        [value]="75"
+        [value]="solvedPercentage"
       ></mat-progress-spinner>
-      <span class="label"> 40% </span>
+      <span class="label"> {{ solvedPercentage }}% </span>
+    </div>
+    <div class="rounded border mx-3 my-auto py-1 px-2">
+      <small>{{ solvedQuestions }} / {{ totalQuestions }}</small>
     </div>
   </div>
 </div>
 
 <div class="container">
   <table class="container table table-striped rounded px-4">
-    <thead>
+    <!-- <thead>
       <tr>
-        <th scope="col">Status</th>
+        <th scope="col" class="text-primary">Status</th>
         <th scope="col">LeetCode</th>
         <th scope="col">Title</th>
         <th scope="col">Difficulty</th>
         <th scope="col">Star</th>
       </tr>
-    </thead>
+    </thead> -->
     <tbody>
       <tr *ngFor="let row of data">
         <td *ngFor="let col of tableColumns">
-          <ng-container *ngIf="col.value === 'status'">
-            <mat-checkbox></mat-checkbox>
-          </ng-container>
-          <ng-container *ngIf="col.value !== 'status'">
-            {{ row[col.value] }}
+          <ng-container [ngSwitch]="col.value">
+            <ng-container *ngSwitchCase="questionCol.SOLVED">
+              <mat-checkbox
+                [(ngModel)]="row.solved"
+                (click)="onSolveQuestion(row)"
+              ></mat-checkbox>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="questionCol.TITLE">
+              <a [href]="row.url" target="_blank" class="text-default">
+                {{ row.leetcode_number }}. &nbsp; {{ row.name }}
+              </a>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="questionCol.DIFFICULTY">
+              <div
+                class="text-center"
+                [ngClass]="difficultyProperty[row.difficulty].cssClass"
+              >
+                <strong> {{ difficultyProperty[row.difficulty].label }}</strong>
+              </div>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="questionCol.STARRED">
+              <div class="text-end text-danger pe-3 my-auto">
+                <button
+                  matRipple
+                  color="warn"
+                  class="btn btn-sm rounded-pill border-0"
+                  (click)="onStarQuestion(row)"
+                >
+                  <mat-icon
+                    [ngClass]="row.starred ? 'text-warning' : 'text-secondary'"
+                    >{{ row.starred ? "star" : "star_border" }}</mat-icon
+                  >
+                </button>
+              </div>
+            </ng-container>
           </ng-container>
         </td>
       </tr>
@@ -70,4 +106,5 @@
 </ngb-accordion> -->
 <!-- <span>&#9733; <b>Fancy</b> title &#9734;</span> -->
 
+<br />
 <br />
