@@ -1,0 +1,16 @@
+.font-sm {
+  font-size: small;
+}
+
+.pointer {
+  cursor: pointer;
+  text-decoration: None;
+}
+
+.pointer:hover {
+  text-decoration: underline;
+}
+
+.pointer-row {
+  cursor: pointer;
+}

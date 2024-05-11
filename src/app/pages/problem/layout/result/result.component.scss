@@ -1,0 +1,16 @@
+.result-cust {
+  cursor: pointer;
+  //border: 1px solid #eeeeee00;
+}
+
+.result-cust:hover {
+  background-color: var(--highlight-bg);
+}
+
+.font-sm {
+  font-size: small;
+}
+
+.result-section {
+  max-height: 35vh;
+}

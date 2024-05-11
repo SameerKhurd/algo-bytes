@@ -1,0 +1,249 @@
+<div class="result-section overflow-auto">
+  <!-- Header -->
+  <div class="d-flex ps-3 p-2 pb-2 font-sm bg-highlight">
+    <div class="me-auto fw-bold pe-4">
+      <i
+        class="pi pi-check-square pe-2 text-success fw-bold align-middle"
+        style="font-size: 0.9rem"
+      ></i>
+      <span class="align-middle">Test Result</span>
+    </div>
+
+    <div class="fw-bold mx-2" [ngSwitch]="loadingState.execution">
+      <div *ngSwitchCase="executionState.RUN_LOADING">
+        <div
+          class="spinner-border text-secondary spinner-border-sm align-middle me-2"
+          st
+          role="status"
+        >
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="executionState.SUBMIT_LOADING">
+        <div
+          class="spinner-border text-secondary spinner-border-sm align-middle me-2"
+          st
+          role="status"
+        >
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="executionState.COMPLETE">
+        <span
+          *ngIf="!currTestResult.error"
+          [ngClass]="
+            currTestResult.finalStatus ? 'text-success' : 'text-danger'
+          "
+        >
+          [ {{ currTestResult.passedCases }}/{{ currTestResult.totalCases }} ]
+          &nbsp;
+          {{
+            currTestResult.finalStatus
+              ? "All Testcases Passed"
+              : "Testcases Failed"
+          }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" [ngSwitch]="loadingState.execution">
+    <!-- Loading Result -->
+    <div *ngSwitchCase="executionState.RUN_LOADING">
+      <p-skeleton styleClass="my-2" borderRadius="16px"></p-skeleton>
+      <p-skeleton
+        width="10rem"
+        styleClass="mb-2"
+        borderRadius="16px"
+      ></p-skeleton>
+      <p-skeleton
+        width="5rem"
+        styleClass="mb-2"
+        borderRadius="16px"
+      ></p-skeleton>
+      <p-skeleton
+        height="2rem"
+        styleClass="mb-2"
+        borderRadius="16px"
+      ></p-skeleton>
+      <p-skeleton width="10rem" height="4rem" borderRadius="16px"></p-skeleton>
+    </div>
+    <div *ngSwitchCase="executionState.SUBMIT_LOADING">
+      <p-skeleton styleClass="my-2" borderRadius="16px"></p-skeleton>
+      <p-skeleton
+        width="10rem"
+        styleClass="mb-2"
+        borderRadius="16px"
+      ></p-skeleton>
+      <p-skeleton
+        width="5rem"
+        styleClass="mb-2"
+        borderRadius="16px"
+      ></p-skeleton>
+      <p-skeleton
+        height="2rem"
+        styleClass="mb-2"
+        borderRadius="16px"
+      ></p-skeleton>
+      <p-skeleton width="10rem" height="4rem" borderRadius="16px"></p-skeleton>
+    </div>
+    <!-- Server Error  -->
+    <div *ngSwitchCase="executionState.SERVER_ERROR">
+      <div class="text-center" style="padding-top: 40px">
+        <i
+          class="pi pi-exclamation-triangle text-danger"
+          style="font-size: 3rem"
+        ></i>
+        <br />
+        <div class="py-3">
+          <h5 class="text-danger">Something went wrong!</h5>
+          <h6 class="text-danger">Error occured while submitting your code.</h6>
+          <h6 class="text-danger">
+            Please try runnig or submitting the code again after sometime
+          </h6>
+        </div>
+      </div>
+    </div>
+
+    <!-- No-run -->
+    <div *ngSwitchCase="executionState.NORUN">
+      <div class="text-center txt-secondary" style="padding-top: 90px">
+        Run the code to see the test results
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div *ngSwitchCase="executionState.COMPLETE">
+      <ng-container *ngIf="currTestResult.error; else resultTemplate">
+        <h5 class="text-danger p-3">Runtime Error</h5>
+        <div
+          class="font-monospace bg-highlight rounded-2 px-3 py-2 my-2 m-2 p-1 text-danger font-sm"
+        >
+          <small>{{ currTestResult.errorText }}</small>
+        </div>
+      </ng-container>
+      <ng-template #resultTemplate>
+        <div class="d-flex flex-wrap pt-3">
+          <div
+            matRipple
+            *ngFor="let result of currTestResult.results; let i = index"
+            class="m-1 ms-2 rounded-3 bg-tertiary px-3 py-1 result-cust font-sm"
+            [ngClass]="
+              i == currTestcaseIndex
+                ? 'fw-bold border border-0 bg-highlight'
+                : ''
+            "
+            (click)="onTestcaseSelect(i)"
+          >
+            <span
+              [ngClass]="
+                result.status === testcaseStatus.PASSED
+                  ? 'text-success'
+                  : 'text-danger'
+              "
+            >
+              <i
+                style="font-size: 0.85rem"
+                class="pi pe-1 align-middle fw-bold"
+                [ngClass]="testcaseTitle[result.status].icon"
+              ></i>
+              <span class="txt-primary"> Case {{ i + 1 }}</span>
+            </span>
+          </div>
+        </div>
+        <br />
+
+        <div class="container font-sm">
+          <div class="d-flex justify-content-between">
+            <div>
+              <strong class="py-3">
+                Testcase: &nbsp;
+                <span
+                  [ngClass]="
+                    testcaseTitle[
+                      currTestResult.results[currTestcaseIndex].status
+                    ].cssClass
+                  "
+                >
+                  <!-- <i
+                  class="pi px-2"
+                  [ngClass]="status[currTestResult.results[currTestcaseIndex].status].icon"
+                ></i> -->
+                  {{
+                    testcaseTitle[
+                      currTestResult.results[currTestcaseIndex].status
+                    ].label
+                  }}
+                </span>
+              </strong>
+            </div>
+            <div>
+              <strong class="py-3"> Execution Time: &nbsp; </strong>
+              <span class="">
+                {{ currTestResult.results[currTestcaseIndex].executionTime }}
+                ms</span
+              >
+            </div>
+          </div>
+
+          <div class="py-2">
+            <strong> Input: </strong>
+            <div
+              class="bg-highlight font-monospace rounded-3 px-2 my-2 mx-1 p-1 pb-2"
+              *ngFor="
+                let input of currTestResult.results[currTestcaseIndex].input;
+                let i = index
+              "
+            >
+              <div class="pb-1">
+                <small class="txt-secondary"
+                  >{{ question.functionArguments[i] }} =
+                </small>
+              </div>
+
+              {{ input }} &nbsp;
+            </div>
+          </div>
+
+          <div class="py-2">
+            <strong> Output: </strong>
+            <div
+              class="font-monospace bg-highlight rounded-2 px-2 my-2 mx-1 p-1"
+            >
+              {{ currTestResult.results[currTestcaseIndex].output }} &nbsp;
+            </div>
+          </div>
+
+          <div class="py-2">
+            <strong> Expected: </strong>
+            <div
+              class="font-monospace bg-highlight rounded-2 px-2 my-2 mx-1 p-1"
+            >
+              {{ currTestResult.results[currTestcaseIndex].expected }} &nbsp;
+            </div>
+          </div>
+
+          <div class="py-2">
+            <strong> Stdout: </strong>
+            <div
+              class="font-monospace bg-highlight rounded-2 px-2 my-2 mx-1 p-1"
+            >
+              {{ currTestResult.results[currTestcaseIndex].stdout }} &nbsp;
+            </div>
+          </div>
+
+          <div class="py-2">
+            <strong> Stderr: </strong>
+            <div
+              class="font-monospace bg-highlight rounded-2 px-2 my-2 mx-1 p-1"
+            >
+              {{ currTestResult.results[currTestcaseIndex].stderr }} &nbsp;
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

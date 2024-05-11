@@ -1,0 +1,97 @@
+<div *ngIf="!outlet.isActivated">
+  <div class="container align-items-center w-75">
+    <p-table
+      [value]="dataService.questions"
+      styleClass="p-datatable-sm p-datatable-striped"
+    >
+      <ng-template pTemplate="header">
+        <tr class="font-sm txt-secondary border-bottom">
+          <th class="ps-3" style="width: 10%">Status</th>
+          <th style="width: 40%">Title</th>
+          <th style="width: 20%">Acceptance</th>
+          <th style="width: 20%">Difficulty</th>
+          <th style="width: 10%" class="text-end pe-3">Bookmark</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-question let-rowIndex="rowIndex">
+        <ng-container *ngIf="loading; else tableTemplate">
+          <tr *ngFor="let item of loadingArray">
+            <td class="py-3"><p-skeleton></p-skeleton></td>
+            <td><p-skeleton></p-skeleton></td>
+            <td><p-skeleton></p-skeleton></td>
+            <td><p-skeleton></p-skeleton></td>
+            <td><p-skeleton></p-skeleton></td>
+          </tr>
+        </ng-container>
+        <ng-template #tableTemplate>
+          <tr class="font-sm">
+            <td>
+              <a [routerLink]="[question.qid]">
+                <i
+                  class="pi ps-3 align-middle fw-bold"
+                  style="font-size: 0.9rem"
+                  [ngClass]="[
+                    userQuestionStatusPropeties[question.status].icon,
+                    userQuestionStatusPropeties[question.status].cssClass
+                  ]"
+                  [pTooltip]="
+                    userQuestionStatusPropeties[question.status].label
+                  "
+                  tooltipPosition="right"
+                ></i>
+              </a>
+            </td>
+            <td>
+              <a [routerLink]="[question.qid]"> {{ question.title }}</a>
+            </td>
+            <td>
+              <span
+                class="px-2"
+                pTooltip="Accepted {{ question.accepted }} out of {{
+                  question.submitted
+                }} submissions"
+              >
+                {{
+                  (question.submitted > 0
+                    ? (question.accepted / question.submitted) * 100
+                    : 0
+                  ).toFixed(1)
+                }}%</span
+              >
+            </td>
+            <td>
+              <span
+                class="px-2 py-1 my-2"
+                [ngClass]="difficultyLevelProperties[question.diff].cssClass"
+              >
+                {{ difficultyLevelProperties[question.diff].label }}
+              </span>
+            </td>
+            <td class="text-end pe-4">
+              <div>
+                <button
+                  matRipple
+                  class="btn btn-sm p-0 px-2 rounded-pill"
+                  (click)="onBookmark(rowIndex)"
+                  pTooltip="Bookmark"
+                  tooltipPosition="bottom"
+                >
+                  <i
+                    class="pi align-middle"
+                    style="font-size: 0.85rem"
+                    [ngClass]="
+                      question.bookmark
+                        ? 'pi-star-fill text-warning'
+                        : 'pi-star txt-secondary'
+                    "
+                  ></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+<router-outlet #outlet="outlet"></router-outlet>

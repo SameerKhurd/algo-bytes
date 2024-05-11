@@ -1,0 +1,271 @@
+<div>
+  <a
+    (click)="onBack()"
+    class="txt-secondary pointer"
+    pTooltip="Go back to Problem Description"
+    tooltipPosition="bottom"
+  >
+    <i class="pi pi-angle-left pe-1 align-middle" style="font-size: 0.8rem"></i>
+    <small>Back to Description </small>
+  </a>
+</div>
+<div class="container p-3 pt-3 mt-2 border-top">
+  <!-- Title -->
+  <div class="py-1 d-flex justify-content-between">
+    <h5>Your Submissions</h5>
+  </div>
+
+  <ng-container
+    *ngIf="
+      loadingUserQuestionSubmissions === userQuestionSubmissionsState.ERROR;
+      else submissionTemplate
+    "
+  >
+    <!-- Error User Question Submissions  -->
+    <div class="text-center" style="padding-top: 20%">
+      <i
+        class="pi pi-exclamation-triangle text-danger"
+        style="font-size: 3rem"
+      ></i>
+      <br />
+      <div class="py-3">
+        <h5 class="text-danger">Something went wrong!</h5>
+        <h6 class="text-danger">
+          Error occured while fetching your submissions. Please try agian
+          after sometime
+        </h6>
+      </div>
+
+      <a
+        (click)="getUserQuestionSubmissions()"
+        class="txt-secondary pointer"
+        pTooltip="Retry fetching submission details again"
+        tooltipPosition="bottom"
+      >
+        <i class="pi pi-replay pe-1 align-middle" style="font-size: 0.8rem"></i>
+        <span>Retry</span>
+      </a>
+    </div>
+  </ng-container>
+  <ng-template #submissionTemplate>
+    <ng-container *ngIf="submissions.length === 0; else validSubmissions">
+      <!-- No User Question Submissions  -->
+      <div class="text-center" style="padding-top: 20%">
+        <i class="pi pi-stopwatch text-info" style="font-size: 3rem"></i>
+        <br />
+        <div class="py-3">
+          <h5 class="fw-bold">Ohh!</h5>
+          <h6>You don't have any submissions for this problem yet</h6>
+          <h6>Submit your code to get started</h6>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #validSubmissions>
+      <!-- Selected Submission Section -->
+      <div class="container border rounded-3 p-2 mt-2">
+        <div [ngSwitch]="loadingSubmission">
+          <!-- Loading Submission -->
+          <div *ngSwitchCase="submissionState.LOADING">
+            <p-skeleton
+              width="5rem"
+              styleClass="mb-2"
+              borderRadius="16px"
+            ></p-skeleton>
+            <p-skeleton styleClass="my-2" borderRadius="16px"></p-skeleton>
+            <p-skeleton
+              width="10rem"
+              styleClass="mb-2"
+              borderRadius="16px"
+            ></p-skeleton>
+
+            <p-skeleton height="6rem" borderRadius="16px"></p-skeleton>
+          </div>
+
+          <!-- Error Submission -->
+          <div *ngSwitchCase="submissionState.ERROR">
+            <div class="text-center py-3">
+              <i
+                class="pi pi-exclamation-triangle text-danger"
+                style="font-size: 2rem"
+              ></i>
+              <br />
+              <div class="py-2">
+                <h6 class="text-danger">Something went wrong!</h6>
+                <div class="text-danger">
+                  Error occured while fetching your submission. Please
+                  try agian after sometime
+                </div>
+              </div>
+
+              <a
+                (click)="getSubmission()"
+                class="txt-secondary pointer"
+                pTooltip="Retry fetching submission details again"
+                tooltipPosition="bottom"
+              >
+                <i
+                  class="pi pi-replay pe-1 align-middle"
+                  style="font-size: 0.8rem"
+                ></i>
+                <small>Retry</small>
+              </a>
+            </div>
+          </div>
+
+          <!-- Submission -->
+          <div *ngSwitchCase="submissionState.COMPLETE">
+            <!-- Curr submission header -->
+            <div class="d-flex justify-content-between">
+              <div class="px-2 align-self-center">
+                <h6
+                  class=""
+                  [ngClass]="
+                    selectedSubmission.status ? 'text-success' : 'text-danger'
+                  "
+                >
+                  {{ selectedSubmission.status ? "Passed" : "Failed" }}
+                </h6>
+                <div class="font-sm">
+                  <i
+                    class="pi pi-user p-1 align-middle rounded bg-highlight txt-secondary border rounded-circle"
+                    style="font-size: 0.7rem"
+                  ></i>
+                  &nbsp;
+                  <strong>{{ dataService.user.username }}</strong>
+                  <span class="txt-secondary">
+                    &nbsp;submitted at
+                    {{
+                      selectedSubmission.time | date : "MMM d, y &nbsp; hh:mm a"
+                    }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="my-3 d-flex bg-highlight rounded-3 p-2 px-3 me-2">
+                <div class="align-self-center pe-1">
+                  <i
+                    class="pi pi-clock pe-2 align-middle"
+                    style="font-size: 0.8rem"
+                  ></i>
+                  <small>Runtime</small>
+                </div>
+                <div class="align-self-center ps-1">
+                  <span class="h6">
+                    {{
+                      selectedSubmission.runtime &&
+                      selectedSubmission.runtime > -1
+                        ? selectedSubmission.runtime + " ms "
+                        : "N/A"
+                    }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Code section -->
+            <div class="px-2" style="height: 250px">
+              <div class="fw-bold txt-secondary py-2">
+                Submitted Code &nbsp; | &nbsp;
+                {{ programmingLanguages[selectedSubmission.language].label }}
+              </div>
+              <div style="height: 200px" class="border rounded-3">
+                <ngx-monaco-editor
+                  class="m-0 p-0 rounded-3"
+                  [options]="editorOptions"
+                  [(ngModel)]="submittedCode"
+                ></ngx-monaco-editor>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+
+      <br />
+      <!-- Submission table -->
+      <div class="mx-s4">
+        <p-table
+          [value]="submissions"
+          styleClass="p-datatable-sm p-datatable-striped"
+        >
+          <ng-template pTemplate="header">
+            <tr class="font-sm txt-secondary border-bottom">
+              <th class="ps-1" style="width: 15%">Status</th>
+              <th style="width: 40%">Time</th>
+              <th style="width: 20%">Language</th>
+              <th style="width: 20%">Runtime</th>
+              <th style="width: 5%"></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-submission let-rowIndex="rowIndex">
+            <ng-container
+              *ngIf="
+                loadingUserQuestionSubmissions ===
+                  userQuestionSubmissionsState.LOADING;
+                else submissionTableTemplate
+              "
+            >
+              <tr *ngFor="let item of loadingArray">
+                <td class="py-3"><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+              </tr>
+            </ng-container>
+
+            <ng-template #submissionTableTemplate>
+              <tr
+                class="font-sm pointer-row"
+                [ngClass]="{
+                  'bg-highlight': submission === selectedSubmission
+                }"
+                (click)="onSubmissionSelect(submission)"
+              >
+                <td>
+                  <span
+                    class="pointer"
+                    [ngClass]="
+                      submission.status ? 'text-success' : 'text-danger'
+                    "
+                  >
+                    {{ submission.status ? "Passed" : "Failed" }}
+                  </span>
+                </td>
+                <td>
+                  <span class="txt-secondary">
+                    {{ submission.time | date : "MMM d, y &nbsp; hh:mm a" }}
+                  </span>
+                </td>
+                <td>
+                  <small class="bg-highlight rounded-3 p-1 px-2 txt-secondary">
+                    {{ programmingLanguages[submission.language].label }}
+                  </small>
+                </td>
+                <td>
+                  <span class="txt-secondary">
+                    <i
+                      class="pi pi-clock px-1 align-middle"
+                      style="font-size: 0.8rem"
+                    ></i>
+                    {{
+                      submission.runtime && submission.runtime > -1
+                        ? submission.runtime + " ms"
+                        : "N/A"
+                    }}
+                  </span>
+                </td>
+                <td class="text-end pe-3" pTooltip="Open Submission">
+                  <i
+                    class="pi pi-angle-right pe- align-middle fw-bold txt-secondary"
+                    style="font-size: 0.8rem"
+                  ></i>
+                </td>
+              </tr>
+            </ng-template>
+          </ng-template>
+        </p-table>
+      </div>
+    </ng-template>
+  </ng-template>
+</div>

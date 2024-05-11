@@ -1,0 +1,53 @@
+<div class="" (window:resize)="onResize($event)">
+  <p-splitter
+    [style]="{ height: avialableHeight - 75 + 'px', border: 0 + 'px' }"
+    [panelSizes]="[45, 55]"
+    [minSizes]="[20, 20]"
+    styleClass="mb-5"
+  >
+    <ng-template pTemplate>
+      <div
+        class="col flex align-items-center justify-content-center m-2 border rounded-4 overflow-auto"
+      >
+        <app-prompt
+          #promptChildComponent
+          class="overflow-auto"
+          [question]="question"
+          [loadingState]="loadingState"
+          (onRetryEvent)="getQuestion(dataService.qid)"
+        ></app-prompt>
+      </div>
+    </ng-template>
+    <ng-template pTemplate>
+      <p-splitter
+        layout="vertical"
+        [panelSizes]="[60, 40]"
+        [minSizes]="[60, 20]"
+      >
+        <ng-template pTemplate>
+          <div
+            style="flex-grow: 1; margin: 5px"
+            class="m-2 border rounded-4 overflow-auto"
+          >
+            <app-editor
+              [loadingState]="loadingState"
+              [functionArguments]="functionArguments"
+              (onRunEvent)="executeCode($event)"
+            ></app-editor>
+          </div>
+        </ng-template>
+        <ng-template pTemplate>
+          <div
+            class="col flex align-items-center justify-content-center m-2 border rounded-4 overflow-auto"
+          >
+            <app-result
+              [loadingState]="loadingState"
+              [question]="question"
+              [testResult]="testResult"
+            ></app-result>
+          </div>
+        </ng-template>
+      </p-splitter>
+    </ng-template>
+  </p-splitter>
+</div>

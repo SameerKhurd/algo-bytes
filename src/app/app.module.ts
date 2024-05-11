@@ -29,6 +29,34 @@ import { MatRippleModule } from '@angular/material/core';
 import { ThemeService } from './services/theme.service';
 import { QuestionSectionComponent } from './common/question-section/question-section.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
+import { ProblemComponent } from './pages/problem/problem.component';
+
+import { SplitterModule } from 'primeng/splitter';
+import { PromptComponent } from './pages/problem/layout/prompt/prompt.component';
+import { ChipsModule } from 'primeng/chips';
+
+import { MonacoEditorModule, MONACO_PATH } from '@materia-ui/ngx-monaco-editor';
+import { EditorComponent } from './pages/problem/layout/editor/editor.component';
+
+import { ThemeModule } from './theme/theme.module';
+import { lightTheme } from './theme/light-theme';
+import { darkTheme } from './theme/dark-theme';
+import { ResultComponent } from './pages/problem/layout/result/result.component';
+import { ListboxModule } from 'primeng/listbox';
+import { ButtonModule } from 'primeng/button';
+import { SkeletonModule } from 'primeng/skeleton';
+import { DropdownModule } from 'primeng/dropdown';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TooltipModule } from 'primeng/tooltip';
+import { TableModule } from 'primeng/table';
+import { AuthService } from './services/auth.service';
+import { DataService } from './services/data.service';
+import { ApplicationService } from './services/http-services/application.service';
+import { BookmarkService } from './services/http-services/bookmark.service';
+import { SubmissionService } from './services/http-services/submission.service';
+import { SubmissionsComponent } from './pages/problem/layout/submissions/submissions.component';
+import { ProblemsComponent } from './pages/problems/problems.component';
 
 @NgModule({
   declarations: [
@@ -37,14 +65,22 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomeComponent,
     QuestionTableComponent,
     QuestionSectionComponent,
+    ProblemComponent,
+    PromptComponent,
+    EditorComponent,
+    ResultComponent,
+    SubmissionsComponent,
+    ProblemsComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     MatToolbarModule,
     MatButtonModule,
+    ButtonModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
@@ -57,8 +93,33 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatCheckboxModule,
     MatRippleModule,
     NgbModule,
+    MonacoEditorModule,
+    SkeletonModule,
+    // Prime NG
+    ListboxModule,
+    TooltipModule,
+    TableModule,
+    SplitterModule,
+    DropdownModule,
+    ProgressSpinnerModule,
+    ChipsModule,
+    ThemeModule.forRoot({
+      themes: [lightTheme, darkTheme],
+      active: 'light',
+    }),
   ],
-  providers: [ThemeService],
+  providers: [
+    ThemeService,
+    {
+      provide: MONACO_PATH,
+      useValue: 'https://unpkg.com/monaco-editor@0.24.0/min/vs',
+    },
+    AuthService,
+    DataService,
+    BookmarkService,
+    ApplicationService,
+    SubmissionService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

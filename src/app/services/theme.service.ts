@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, EventEmitter } from '@angular/core';
+import { THEMES, ACTIVE_THEME, Theme } from 'src/app/theme/symbols';
 
 export const enum THEME {
   DARK = 'dark',
@@ -7,9 +8,14 @@ export const enum THEME {
 
 @Injectable()
 export class ThemeService {
+  themeChange = new EventEmitter<Theme>();
+
   private localStorageThemeKey = 'theme';
 
-  constructor() {
+  constructor(
+    @Inject(THEMES) public themes: Theme[],
+    @Inject(ACTIVE_THEME) public customTheme: string
+  ) {
     const curTheme = this.theme;
     this.theme = curTheme;
   }
@@ -19,9 +25,21 @@ export class ThemeService {
     return curTheme ? curTheme : THEME.DARK;
   }
 
+  getActiveCustomTheme() {
+    const theme = this.themes.find((t) => t.name === this.theme);
+    if (!theme) {
+      throw new Error(`Theme not found: '${this.theme}'`);
+    }
+    return theme;
+  }
+
   private set theme(newTheme: string) {
     document.documentElement.setAttribute('data-bs-theme', newTheme);
     document.documentElement.setAttribute('theme', newTheme);
+
+    this.customTheme = newTheme;
+    this.themeChange.emit(this.getActiveCustomTheme());
+
     localStorage.setItem(this.localStorageThemeKey, newTheme);
   }
 
