@@ -1,0 +1,103 @@
+import math
+import json
+import datetime
+import sys
+import io
+from threading import Thread
+
+
+{{user_code}}
+
+
+class CustomThread(Thread):
+    def __init__(self, args):
+        Thread.__init__(self)
+        self.args = args
+        self.return_value = None
+        self.stdout = ""
+        self.stderr = ""
+
+    def run(self):
+        try:
+            sys.stdout = io.TextIOWrapper(io.BytesIO(), sys.stdout.encoding)
+            self.return_value = solve(*self.args)
+        except Exception as err:
+            self.stderr = str(err)
+        else:
+            sys.stdout.seek(0)
+            self.stdout = sys.stdout.read()
+
+
+TIME_LIMIT = 2  # in seconds
+
+
+def runCode(inputTestCasesFilepath: str, outputFilepath: str):
+    testCases = []
+    passedCases = 0
+    with open(inputTestCasesFilepath, "r") as fr:
+        testCases = json.load(fr)
+
+    runtime = 0
+    tcResults = []
+    for testCase in testCases:
+        output = ""
+        status = ""
+        stdout = ""
+        stderr = ""
+
+        startTime = datetime.datetime.now()
+
+        childThread = CustomThread(args=testCase['input'])
+        childThread.start()
+
+        childThread.join(TIME_LIMIT)
+
+        if childThread.is_alive():
+            status = "tle"
+        else:
+            output = childThread.return_value
+            stdout = childThread.stdout
+            stderr = childThread.stderr
+
+            if output == testCase["expected"]:
+                passedCases += 1
+                status = "passed"
+            elif stderr.strip():
+                status = "error"
+            else:
+                status = "failed"
+
+        endTime = datetime.datetime.now()
+        elapsedTime = endTime - startTime
+        executionTime = int(math.ceil(elapsedTime.total_seconds() * 1000))
+        runtime += executionTime
+
+        tcResult = {
+            "tid": testCase["tid"],
+            "input": testCase["input"],
+            "expected": testCase["expected"],
+            "output": output,
+            "status": status,
+            "stdout": stdout,
+            "stderr": stderr,
+            "executionTime": executionTime
+        }
+        tcResults.append(tcResult)
+
+    result = {
+        "finalStatus": passedCases == len(testCases),
+        "passedCases": passedCases,
+        "totalCases": len(testCases),
+        "results": tcResults,
+        "runtime": runtime,
+        "error": False,
+        "errorText": ""
+    }
+    with open(outputFilepath, "w") as fw:
+        json.dump(result, fw)
+
+
+inputTestCasesFilepath = str(sys.argv[1])
+outputFilepath = str(sys.argv[2])
+runCode(inputTestCasesFilepath=inputTestCasesFilepath,
+        outputFilepath=outputFilepath)
