@@ -18,3 +18,4 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_FIRE_PLAYGROUND_100 }}
           channelId: live
           projectId: fire-playground-100
+          entryPoint: "./frontend/algo-blitz-web-app"
