@@ -1,0 +1,132 @@
+<div style="height: 100%">
+  <!-- Header -->
+
+  <div class="d-flex ps-3 p-2 pb-2 font-sm bg-highlight">
+    <div class="me-auto fw-bold pe-4">
+      <i class="pi pi-code pe-2 text-success align-middle fw-bold"></i>
+      <span class="align-middle">Code &nbsp;&nbsp;&nbsp;</span>
+    </div>
+    <div class="align-middle">Language</div>
+
+    <div class="me-1 px-2 col-md-2 font-sm">
+      <select
+        class="form-select ps-2 p-0 font-sm align-middle"
+        [(ngModel)]="selectedLanguage"
+        [disabled]="loadingState.question === questionState.LOADING"
+      >
+        <option
+          *ngFor="let language of availableLanguages"
+          [value]="language.value"
+          [disabled]="language.disabled"
+        >
+          {{ language.label }}
+        </option>
+      </select>
+    </div>
+    <div class="">
+      <button
+        pRipple
+        class="btn btn-sm p-0 px-2"
+        (click)="onResetCode()"
+        pTooltip="Reset to default code"
+        tooltipPosition="bottom"
+      >
+        <i class="pi pi-replay align-middle" style="font-size: 0.8rem"></i>
+      </button>
+    </div>
+
+    <!-- Run Button -->
+    <div class="mx-1">
+      <button
+        style="min-width: 60px"
+        pRipple
+        class="btn btn-success rounded-3 btn-sm p-0"
+        [disabled]="
+          loadingState.execution === executionState.RUN_LOADING ||
+          loadingState.execution === executionState.SUBMIT_LOADING ||
+          loadingState.question === questionState.LOADING ||
+          loadingState.question === questionState.ERROR
+        "
+        pTooltip="Run the code"
+        tooltipPosition="bottom"
+        (click)="onRun()"
+      >
+        <ng-container
+          *ngIf="
+            loadingState.execution === executionState.RUN_LOADING;
+            else runButton
+          "
+        >
+          <div
+            class="spinner-border spinner-border-sm align-middle mx-2"
+            role="status"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </ng-container>
+        <ng-template #runButton>
+          &nbsp;
+          <i
+            class="pi pi-caret-right align-middle pe-1"
+            style="font-size: 0.85rem"
+          ></i>
+          <small>Run</small>
+          &nbsp;
+        </ng-template>
+      </button>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="me-2">
+      <button
+        style="min-width: 60px"
+        pRipple
+        class="btn rounded-3 btn-sm p-0"
+        [disabled]="
+          loadingState.execution === executionState.RUN_LOADING ||
+          loadingState.execution === executionState.SUBMIT_LOADING ||
+          loadingState.question === questionState.LOADING ||
+          loadingState.question === questionState.ERROR
+        "
+        pTooltip="Submit the code"
+        tooltipPosition="bottom"
+        (click)="onSubmit()"
+      >
+        <ng-container
+          *ngIf="
+            loadingState.execution === executionState.SUBMIT_LOADING;
+            else submitButton
+          "
+        >
+          <div
+            class="spinner-border spinner-border-sm align-middle mx-2"
+            role="status"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </ng-container>
+        <ng-template #submitButton>
+          &nbsp;
+          <i
+            class="pi pi-cloud-upload align-middle pe-2"
+            style="font-size: 0.95rem"
+          ></i>
+          <small>Submit</small>
+          &nbsp;
+        </ng-template>
+      </button>
+    </div>
+  </div>
+
+  <!-- Coding Area -->
+  <div
+    style="height: 80%"
+    *ngIf="loadingState.question === questionState.COMPLETE"
+  >
+    <ngx-monaco-editor
+      class="m-0 p-1"
+      [options]="editorOptions"
+      [(ngModel)]="userCode"
+    ></ngx-monaco-editor>
+  </div>
+</div>

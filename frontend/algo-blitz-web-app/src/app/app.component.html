@@ -1,0 +1,76 @@
+<!-- <button
+  type="button"
+  class="btn icon"
+  (click)="changeTheme()"
+>
+  <i class="fas fa-moon"></i> Dark
+</button>
+<button
+  type="button"
+  class="btn icon"
+  (click)="changeTheme()"
+>
+  <i class="fas fa-sun"></i> Light
+</button> -->
+
+<nav
+  id="main-navbar"
+  class="navbar navbar-expand-lg sticky-top bg-cl shadow-sm custom-font"
+>
+  <div class="container py-0 my-0">
+    <a class="navbar-brand text-secondary" href="#" title="Go to home"
+      ><span>
+        <img
+          class="border border-2 me-2 rounded-pill shadow-lg"
+          style="height: 40px; width: 40px"
+          src="./assets/images/profile-picture.png"
+          alt="Profile Picture"
+        /><strong> BLitzCode100</strong></span
+      ></a
+    >
+
+    <div class="collapse navbar-collapse ps-5" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-secondary">
+        <li class="nav-item px-1">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            title="Go to home"
+            href="#"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item px-1">
+          <a class="nav-link" title="Go to experience" href="/problems"
+            >Problems</a
+          >
+        </li>
+
+        <li class="nav-item px-1">
+          <a class="nav-link" title="Go to contact & references" href="#contact"
+            >Contact & References</a
+          >
+        </li>
+      </ul>
+    </div>
+    <a
+      class="btn btn-outline-success"
+      title="Go to Contact & References"
+      (click)="changeTheme()"
+    >
+      Contact Me
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+<router-outlet></router-outlet>

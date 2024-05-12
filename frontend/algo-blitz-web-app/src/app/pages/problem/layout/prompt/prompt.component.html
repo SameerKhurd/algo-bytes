@@ -1,0 +1,298 @@
+<!-- Header -->
+<div
+  class="d-flex ps-3 p-2 pb-2 border-bttom border-secondary font-sm bg-highlight"
+>
+  <div class="">
+    <button
+      pRipple
+      class="btn btn-sm p-0"
+      (click)="showSubmissionTab(false)"
+      [ngClass]="!loadingState.isSubmissionTab ? 'fw-bold' : 'txt-secondary '"
+      pTooltip="Open Description"
+      tooltipPosition="bottom"
+    >
+      <i
+        class="pi pi-book pe-2 text-primary align-middle"
+        style="font-size: 0.9rem"
+      ></i>
+      <span class="align-middle">Description</span>
+    </button>
+  </div>
+
+  <div class="ms-3 ps-2 border-start">
+    <button
+      pRipple
+      [disabled]="loadingState.question !== questionState.COMPLETE"
+      class="btn btn-sm p-0 px-2"
+      pTooltip="Open Your Submissions"
+      (click)="showSubmissionTab(true)"
+      [ngClass]="loadingState.isSubmissionTab ? 'fw-bold' : 'txt-secondary '"
+    >
+      <i
+        class="pi pi-history pe-2 text-warning align-middle"
+        style="font-size: 0.9rem"
+      ></i>
+      <span class="align-middle">Submissions</span>
+    </button>
+  </div>
+  <div class="ms-auto">
+    <button
+      pRipple
+      class="btn btn-sm p-0 px-2"
+      pTooltip="Bookmark"
+      [hidden]="!dataService.questionTable"
+      tooltipPosition="bottom"
+      (click)="onBookmark()"
+    >
+      <i
+        class="pi align-middle"
+        style="font-size: 0.85rem"
+        [ngClass]="
+          dataService.questionTable?.bookmark
+            ? 'pi-star-fill text-warning'
+            : 'pi-star'
+        "
+      ></i>
+    </button>
+  </div>
+</div>
+
+<div class="container p-3" [ngSwitch]="loadingState.question">
+  <!-- Loading Question -->
+  <div *ngSwitchCase="questionState.LOADING">
+    <p-skeleton styleClass="my-2" borderRadius="16px"></p-skeleton>
+    <p-skeleton
+      width="10rem"
+      styleClass="mb-3"
+      borderRadius="16px"
+    ></p-skeleton>
+    <br />
+    <p-skeleton width="5rem" styleClass="mb-3" borderRadius="16px"></p-skeleton>
+    <br />
+
+    <p-skeleton
+      height="2rem"
+      styleClass="mb-3"
+      borderRadius="16px"
+    ></p-skeleton>
+    <p-skeleton
+      width="10rem"
+      styleClass="mb-3"
+      height="4rem"
+      borderRadius="16px"
+    ></p-skeleton>
+
+    <p-skeleton
+      height="2rem"
+      styleClass="mb-3"
+      borderRadius="16px"
+    ></p-skeleton>
+    <p-skeleton
+      width="10rem"
+      styleClass="mb-3"
+      height="4rem"
+      borderRadius="16px"
+    ></p-skeleton>
+
+    <p-skeleton
+      styleClass="my-2"
+      borderRadius="16px"
+      height="6rem"
+    ></p-skeleton>
+  </div>
+
+  <!-- Server Error  -->
+  <div *ngSwitchCase="questionState.ERROR">
+    <div class="text-center" style="padding-top: 20%">
+      <i
+        class="pi pi-exclamation-triangle text-danger"
+        style="font-size: 3rem"
+      ></i>
+      <br />
+      <div class="py-3">
+        <h5 class="text-danger">Something went wrong!</h5>
+        <h6 class="text-danger">
+          Error occured while fetching the problem statement details.
+        </h6>
+        <h6 class="text-danger">
+          Please retry or refresh the page after sometime
+        </h6>
+      </div>
+
+      <a
+        (click)="onRetry()"
+        class="txt-secondary pointer"
+        pTooltip="Retry fetching problem statement details again"
+        tooltipPosition="bottom"
+      >
+        <i class="pi pi-replay pe-1 align-middle" style="font-size: 0.8rem"></i>
+        <span>Retry</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Question  -->
+  <div *ngSwitchCase="questionState.COMPLETE">
+    <div *ngIf="currQuestion" class="overflow-austo font-sm">
+      <!-- Title -->
+      <div class="pt-1 d-flex justify-content-between">
+        <h4>{{ currQuestion.title }}</h4>
+        <div>
+          <ng-container *ngIf="dataService.questionTable">
+            <span class="txt-secondary">
+              {{
+                userQuestionStatusPropeties[dataService.questionTable.status]
+                  .label
+              }}</span
+            >
+            <i
+              class="pi ps-2 align-middle fw-bold"
+              style="font-size: 0.85rem"
+              [ngClass]="[
+                userQuestionStatusPropeties[dataService.questionTable.status]
+                  .icon,
+                userQuestionStatusPropeties[dataService.questionTable.status]
+                  .cssClass
+              ]"
+            ></i>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="pt-2 font-sm">
+        <span
+          class="rounded-4 bg-highlight px-2 py-1 my-2"
+          [ngClass]="difficultyLevelProperties[currQuestion.diff].cssClass"
+        >
+          {{ difficultyLevelProperties[currQuestion.diff].label }}
+        </span>
+        <span
+          *ngFor="let tag of currQuestion.tags"
+          class="ms-2 rounded-4 bg-highlight px-2 py-1 shadow-sm my-2 txt-secondary"
+        >
+          {{ tag }}
+        </span>
+      </div>
+      <br />
+
+      <ng-container *ngIf="loadingState.isSubmissionTab; else promptTemplate">
+        <!-- Submission Tab -->
+        <app-submissions
+          #submissionsChildComponent
+          (onBackEvent)="showSubmissionTab(false)"
+        ></app-submissions>
+      </ng-container>
+      <ng-template #promptTemplate>
+        <!-- Prompt -->
+        <div
+          class="pt-2 pb-2"
+          [innerHTML]="description"
+          *ngFor="let description of currQuestion.prompt"
+        ></div>
+        <br />
+
+        <!-- Exaamples -->
+        <div *ngFor="let example of currQuestion.examples; let i = index">
+          <br />
+          <strong class="py-3">Example {{ i + 1 }}:</strong>
+          <div class="px-3 my-2 mx-1 border-2 font-monospace border-start">
+            <div class="pt-0">
+              <strong>Input:</strong> &nbsp;
+              <span class="txt-secondary">{{ example.input }}</span>
+            </div>
+            <div class="pt-1 font-monospace">
+              <strong>Output:</strong> &nbsp;
+              <span class="txt-secondary">{{ example.output }}</span>
+            </div>
+            <div class="pt-1 font-monospace">
+              <strong>Explanation:</strong>
+              <div
+                class="txt-secondary"
+                *ngFor="let explanation of example.explanations"
+              >
+                {{ explanation }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br />
+        <br />
+
+        <!-- Constraints  -->
+        <div>
+          <strong>Constraints:</strong>
+          <ul>
+            <li
+              *ngFor="let constraint of currQuestion.constraints"
+              class="my-3"
+            >
+              <small class="border rounded-3 p-1 font-monospace bg-highlight">
+                {{ constraint }}</small
+              >
+            </li>
+          </ul>
+        </div>
+
+        <br />
+
+        <!-- Hints Rate -->
+        <div
+          class="my-2 py-2 border-top px-2"
+          *ngIf="currQuestion.hints?.length"
+        >
+          <div class="py-2">
+            <i
+              class="pi pi-key pe-2 align-middle"
+              style="font-size: 0.85rem"
+            ></i>
+            <strong>Hints:</strong>
+          </div>
+
+          <ol>
+            <li
+              *ngFor="let hint of currQuestion.hints"
+              class="txt-secondary py-1"
+            >
+              {{ hint }}
+            </li>
+          </ol>
+        </div>
+
+        <!-- Acceptance Rate -->
+        <div
+          class="my-2 py-2 border-top px-2"
+          *ngIf="dataService.questionTable"
+        >
+          <br />
+          <small class="text-secondary pe-2">Accepted</small>
+          <span>{{ dataService.questionTable.accepted }}</span>
+
+          &nbsp; &nbsp;
+          <small class="text-secondary pe-2 border-start"
+            >&nbsp;&nbsp; &nbsp; Submissions</small
+          >
+          <span>{{ dataService.questionTable.submitted }}</span>
+
+          &nbsp; &nbsp;
+          <small class="text-secondary pe-2 border-start"
+            >&nbsp;&nbsp; &nbsp; Acceptance Rate</small
+          >
+          <span
+            >{{
+              (dataService.questionTable.submitted > 0
+                ? (dataService.questionTable.accepted /
+                    dataService.questionTable.submitted) *
+                  100
+                : 0
+              ).toFixed(1)
+            }}%</span
+          >
+          <br />
+        </div>
+        <br />
+      </ng-template>
+    </div>
+  </div>
+</div>
