@@ -20,6 +20,7 @@
     "@angular/router": "^16.2.0",
     "@materia-ui/ngx-monaco-editor": "^6.0.0",
     "bootstrap": "^5.3.3",
+    "ng2-charts": "^5.0.3",
     "primeicons": "^7.0.0",
     "primeng": "^16.9.1",
     "rxjs": "~7.8.0",

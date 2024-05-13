@@ -1,64 +1,20 @@
-<!-- <button
-  type="button"
-  class="btn icon"
-  (click)="changeTheme()"
->
-  <i class="fas fa-moon"></i> Dark
-</button>
-<button
-  type="button"
-  class="btn icon"
-  (click)="changeTheme()"
->
-  <i class="fas fa-sun"></i> Light
-</button> -->
-
-<nav
-  id="main-navbar"
-  class="navbar navbar-expand-lg sticky-top bg-cl shadow-sm custom-font"
->
-  <div class="container py-0 my-0">
-    <a class="navbar-brand text-secondary" href="#" title="Go to home"
-      ><span>
-        <img
-          class="border border-2 me-2 rounded-pill shadow-lg"
-          style="height: 40px; width: 40px"
-          src="./assets/images/profile-picture.png"
-          alt=""
-        /><strong> Algo Blitz </strong></span
-      ></a
-    >
-
-    <div class="collapse navbar-collapse ps-5" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-secondary">
-        <li class="nav-item px-1">
-          <a
-            class="nav-link active"
-            aria-current="page"
-            title="Go to home"
-            href="#"
-            >Home</a
-          >
-        </li>
-        <li class="nav-item px-1">
-          <a class="nav-link" title="Go to experience" href="/problems"
-            >Problems</a
-          >
-        </li>
-
-        <li class="nav-item px-1">
-          <a class="nav-link" title="Go to contact & references" href="#contact"
-            >References</a
-          >
-        </li>
-      </ul>
-    </div>
+<nav class="navbar navbar-expand-lg navbar-dark bgs-dark border-bottom">
+  <div class="container-fluid">
     <a
-      class="btn btn-outline-success"
-      title="Go to Contact & References"
-      (click)="changeTheme()"
+      class="navbar-brand text-secondary"
+      routerLink="/problems"
+      title="Go to home"
     >
-      Toggle
+      <span class="h6">
+        <i
+          class="pi pi-angle-double-up text-warning align-middle pe-1"
+          style="font-size: 1.5rem"
+        ></i>
+        <span class="title-algo text-light fw-light">algo</span>
+        <span class="title-blitz text-warning fwbold">
+          {{ "{" }}Bytes{{ "}" }}
+        </span>
+      </span>
     </a>
     <button
       class="navbar-toggler"
@@ -71,6 +27,62 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item  ps-4">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            title="Go to all problems"
+            routerLink="/problems"
+          >
+            <span class="font-sm">Problems</span>
+          </a>
+        </li>
+        <li class="nav-item ps-2">
+          <a
+            class="nav-link"
+            aria-current="page"
+            title="Go to all problems"
+            routerLink="/problems"
+          >
+            <span class="font-sm"> Top 10 Problems</span>
+          </a>
+        </li>
+        <li class="nav-item ps-2">
+          <a
+            class="nav-link"
+            aria-current="page"
+            title="Go to all problems"
+            routerLink="/problems"
+          >
+            <span class="font-sm"> Top 25 Problems</span>
+          </a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <a class="align-middle pe-3 me-3 text-light border-end" href="#">
+          <i class="pi align-middle pi-github" style="font-size: 1rem"></i
+        ></a>
+
+        <a
+          class="align-middle text-light pe-3 me-3 border-end"
+          target="_blank"
+          href="https://www.linkedin.com/in/sameer-khurd"
+        >
+          <i class="pi align-middle pi-linkedin" style="font-size: 1rem"></i
+        ></a>
+
+        <div class="font-sm align-middle">
+          <small>
+            Logged in as <strong>{{ dataService.user.username }}</strong>
+          </small>
+        </div>
+      </form>
+    </div>
   </div>
 </nav>
-<router-outlet></router-outlet>
+
+<div>
+  <router-outlet></router-outlet>
+</div>

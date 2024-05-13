@@ -1,13 +1,39 @@
 import { Injectable } from '@angular/core';
 import {
+  Difficulty,
+  QuestionLevel,
   QuestionTable,
   UserQuestionStatus,
 } from '../interfaces/question.interface';
+import { Subject } from 'rxjs';
 
 export interface User {
   uid: string;
   username: string;
   email: string;
+}
+const DifficultySolvedMap = {
+  1: { solved: 'easySolved', total: 'totalEasy' },
+  2: { solved: 'mediumSolved', total: 'totalMedium' },
+  3: { solved: 'hardSolved', total: 'totalHard' },
+};
+const UserQuestionStatusMap = {
+  2: 'solved',
+  0: 'unsolved',
+  1: 'attempted',
+};
+
+export interface ProfileProblemStats {
+  solved: number;
+  unsolved: number;
+  total: number;
+  attempted: number;
+  easySolved: number;
+  mediumSolved: number;
+  hardSolved: number;
+  totalEasy: number;
+  totalMedium: number;
+  totalHard: number;
 }
 
 @Injectable({
@@ -19,11 +45,17 @@ export class DataService {
     username: '',
     email: '',
   };
+  profileProblemStats!: ProfileProblemStats | any;
+  statsChartData = [0, 0, 0, 1];
   questions: QuestionTable[] = [];
+  filteredQuestions: QuestionTable[] = [];
   questionTable?: QuestionTable;
   private currQid = '';
+  statsUpdate = new Subject<boolean>();
 
-  constructor() {}
+  constructor() {
+    this.initialiseProfileProblemStats();
+  }
 
   set user(user: User) {
     this.currUser.uid = user.uid;
@@ -40,17 +72,18 @@ export class DataService {
   }
 
   processQuestions(allQuestions: any, userQuestions: any) {
-    this.questions = allQuestions.map((question: any) => {
-      console.log(
-        userQuestions[question.qid],
-        userQuestions[question.qid]?.bookmark
-      );
+    this.questions = allQuestions.map((question: any): QuestionTable => {
       return {
         accepted: question.accepted,
         qid: question.qid,
         diff: question.diff,
         submitted: question.submitted,
+        acceptance: (question.submitted > 0
+          ? (question.accepted / question.submitted) * 100
+          : 0
+        ).toFixed(1),
         title: question.title,
+        tags: question.tags,
         status:
           userQuestions[question.qid]! && userQuestions[question.qid]?.status
             ? userQuestions[question.qid].status
@@ -59,8 +92,48 @@ export class DataService {
           userQuestions[question.qid]! && userQuestions[question.qid]?.bookmark
             ? userQuestions[question.qid].bookmark
             : false,
+          questionLevel: QuestionLevel.ALL
       };
     });
+    
+    this.updateProfileProblemStats();
+  }
+
+  updateProfileProblemStats() {
+    this.initialiseProfileProblemStats();
+    this.profileProblemStats.total = this.questions.length;
+    for (let question of this.questions) {
+      this.profileProblemStats[DifficultySolvedMap[question.diff].total]++;
+      this.profileProblemStats[UserQuestionStatusMap[question.status]]++;
+      if (question.status === UserQuestionStatus.SOLVED) {
+        this.profileProblemStats[DifficultySolvedMap[question.diff].solved]++;
+      }
+    }
+    this.profileProblemStats.unsolved =
+      this.profileProblemStats.total - this.profileProblemStats.solved;
+    this.statsChartData = [
+      this.profileProblemStats.easySolved,
+      this.profileProblemStats.mediumSolved,
+      this.profileProblemStats.hardSolved,
+      this.profileProblemStats.unsolved,
+    ];
+    this.statsUpdate.next(true);
+  }
+
+  private initialiseProfileProblemStats() {
+    this.statsChartData = [0, 0, 0, 1];
+    this.profileProblemStats = {
+      solved: 0,
+      unsolved: 0,
+      total: 0,
+      easySolved: 0,
+      mediumSolved: 0,
+      hardSolved: 0,
+      attempted: 0,
+      totalEasy: 0,
+      totalMedium: 0,
+      totalHard: 0,
+    };
   }
 
   addLoadingQuestion() {
@@ -74,6 +147,7 @@ export class DataService {
         title: '',
         status: UserQuestionStatus.UNSOLVED,
         bookmark: false,
+        questionLevel: QuestionLevel.ALL,
       },
     ];
   }
@@ -101,5 +175,12 @@ export class DataService {
 
   get qid() {
     return this.currQid;
+  }
+
+  filterQuestions(filterQuestionLevel: QuestionLevel) {
+    this.filteredQuestions = this.questions.filter(
+      (question: QuestionTable): boolean =>
+        question.questionLevel <= filterQuestionLevel
+    );
   }
 }

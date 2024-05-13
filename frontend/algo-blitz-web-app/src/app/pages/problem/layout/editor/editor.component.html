@@ -26,7 +26,7 @@
     <div class="">
       <button
         pRipple
-        class="btn btn-sm p-0 px-2"
+        class="btn btn-sm p-0 px-2 border-0"
         (click)="onResetCode()"
         pTooltip="Reset to default code"
         tooltipPosition="bottom"
@@ -40,7 +40,7 @@
       <button
         style="min-width: 60px"
         pRipple
-        class="btn btn-success rounded-3 btn-sm p-0"
+        class="btn btn-success rounded-3 btn-sm p-0 border-0"
         [disabled]="
           loadingState.execution === executionState.RUN_LOADING ||
           loadingState.execution === executionState.SUBMIT_LOADING ||
@@ -81,7 +81,7 @@
       <button
         style="min-width: 60px"
         pRipple
-        class="btn rounded-3 btn-sm p-0"
+        class="btn rounded-3 btn-sm p-0 border-0"
         [disabled]="
           loadingState.execution === executionState.RUN_LOADING ||
           loadingState.execution === executionState.SUBMIT_LOADING ||

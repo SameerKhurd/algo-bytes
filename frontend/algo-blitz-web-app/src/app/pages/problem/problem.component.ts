@@ -133,6 +133,7 @@ export class ProblemComponent implements OnInit {
               this.dataService.questionTable.status = UserQuestionStatus.SOLVED;
             }
           }
+          this.dataService.updateProfileProblemStats();
         }
 
         this.loadingState.execution = ExecutionState.COMPLETE;

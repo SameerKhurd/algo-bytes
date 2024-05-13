@@ -50,10 +50,11 @@
 
 .bg-highlight {
   background-color: var(--highlight-bg);
+  background-color: #5e5e5e55;
 }
 
-.font-sm{
-    font-size: small;
+.font-sm {
+  font-size: small;
 }
 
 .txt-secondary {
@@ -65,6 +66,11 @@
   color: var(--text-color);
 }
 
+.title-algo {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
 html,
 body {
   height: 100%;
@@ -73,6 +79,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #1e1e1e !important;
 }
 
 /* Importing Bootstrap SCSS file. */

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ThemeService } from './services/theme.service';
 import { AuthService } from './services/auth.service';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,8 @@ export class AppComponent {
 
   constructor(
     private themeService: ThemeService,
-    private authService: AuthService
+    private authService: AuthService,
+    public dataService: DataService
   ) {
     this.authService.getUser();
   }
