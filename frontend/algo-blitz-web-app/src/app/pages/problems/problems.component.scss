@@ -6,3 +6,25 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.brand-section {
+  width: 100%;
+  min-height: 25vh;
+  position: relative;
+  background: rgb(2, 0, 36);
+  //background-image: radial-gradient(circle, #004067 0%, #1e1e1e 100%);
+  background-image: radial-gradient(circle, #3e3e3e 0%, #1e1e1e 75%);
+}
+
+.brand-section-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}

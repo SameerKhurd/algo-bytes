@@ -40,15 +40,23 @@ export const programmingLanguages = {
   5: { label: 'Typescript' },
 };
 
+export enum QuestionLevel {
+  ALL = 5,
+  TOP_10 = 1,
+  TOP_25 = 3,
+}
+
 export interface QuestionTable {
   accepted: number;
   diff: Difficulty;
   qid: string;
   submitted: number;
+  acceptance?: string;
   tags: string[];
   title: string;
   status: UserQuestionStatus;
   bookmark: boolean;
+  questionLevel: QuestionLevel;
 }
 
 export const difficultyLevelProperties = {

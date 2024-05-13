@@ -31,8 +31,8 @@
       <div class="py-3">
         <h5 class="text-danger">Something went wrong!</h5>
         <h6 class="text-danger">
-          Error occured while fetching your submissions. Please try agian
-          after sometime
+          Error occured while fetching your submissions. Please try agian after
+          sometime
         </h6>
       </div>
 
@@ -92,8 +92,8 @@
               <div class="py-2">
                 <h6 class="text-danger">Something went wrong!</h6>
                 <div class="text-danger">
-                  Error occured while fetching your submission. Please
-                  try agian after sometime
+                  Error occured while fetching your submission. Please try agian
+                  after sometime
                 </div>
               </div>
 
@@ -186,12 +186,19 @@
       <div class="mx-s4">
         <p-table
           [value]="submissions"
+          [rowHover]="true"
           styleClass="p-datatable-sm p-datatable-striped"
         >
           <ng-template pTemplate="header">
             <tr class="font-sm txt-secondary border-bottom">
               <th class="ps-1" style="width: 15%">Status</th>
-              <th style="width: 40%">Time</th>
+              <th style="width: 40%" pSortableColumn="time">
+                Time
+                <p-sortIcon
+                  class="float-end pe-2 txt-secondary"
+                  field="time"
+                ></p-sortIcon>
+              </th>
               <th style="width: 20%">Language</th>
               <th style="width: 20%">Runtime</th>
               <th style="width: 5%"></th>

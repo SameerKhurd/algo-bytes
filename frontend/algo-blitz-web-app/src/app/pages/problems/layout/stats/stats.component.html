@@ -1,0 +1,82 @@
+<div
+  class="bg-highlight rounded-4 align-items-center text-center"
+  style="padding: 12px 12px"
+>
+  <div class="font-sm"><strong>Your Stats</strong></div>
+
+  <div class="text-center p-4">
+    <canvas
+      baseChart
+      class="chart"
+      [data]="doughnutChartData"
+      [type]="doughnutChartType"
+      [options]="doughnutChartOptions"
+    >
+    </canvas>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <div class="align-self-center">
+      <strong class="h3 text-light">
+        {{ dataService.profileProblemStats.solved }}
+      </strong>
+    </div>
+    <div class="align-self-center ps-1">
+      <span class="h6"> / {{ dataService.profileProblemStats.total }} </span>
+    </div>
+  </div>
+  <div class="fw-sbold font-sm txt-secondsary">Solved Problems</div>
+  <div class="font-sm txt-secondary pt-3">
+    <small> {{ dataService.profileProblemStats.attempted }} Attempted</small>
+  </div>
+  <!-- Profile Easy Stats -->
+  <div class="bg-highlight rounded-3 px-2 py-1 m-2 mt-4">
+    <div class="text-success fw-bold font-sm">Easy</div>
+    <div class="d-flex justify-content-center">
+      <div class="align-self-center">
+        <strong class="font-sm text-light">
+          {{ dataService.profileProblemStats.easySolved }}
+        </strong>
+      </div>
+      <div class="align-self-center ps-1">
+        <span class="txt-secondary font-sm">
+          / {{ dataService.profileProblemStats.totalEasy }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Medium Stats -->
+  <div class="bg-highlight rounded-3 px-2 py-1 m-2 mt-3">
+    <div class="text-warning font-sm">Medium</div>
+    <div class="d-flex justify-content-center">
+      <div class="align-self-center">
+        <strong class="font-sm text-light">
+          {{ dataService.profileProblemStats.mediumSolved }}
+        </strong>
+      </div>
+      <div class="align-self-center ps-1">
+        <span class="txt-secondary font-sm">
+          / {{ dataService.profileProblemStats.totalMedium }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Hard Stats -->
+  <div class="bg-highlight rounded-3 px-2 py-1 m-2 mt-3">
+    <div class="text-danger fw-bold font-sm">Hard</div>
+    <div class="d-flex justify-content-center">
+      <div class="align-self-center">
+        <strong class="font-sm text-light">
+          {{ dataService.profileProblemStats.hardSolved }}
+        </strong>
+      </div>
+      <div class="align-self-center ps-1">
+        <span class="txt-secondary font-sm">
+          / {{ dataService.profileProblemStats.totalHard }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

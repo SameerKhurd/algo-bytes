@@ -20,6 +20,7 @@ import { ChipsModule } from 'primeng/chips';
 
 import { MonacoEditorModule, MONACO_PATH } from '@materia-ui/ngx-monaco-editor';
 import { EditorComponent } from './pages/problem/layout/editor/editor.component';
+import { NgChartsModule } from 'ng2-charts';
 
 import { ResultComponent } from './pages/problem/layout/result/result.component';
 import { ListboxModule } from 'primeng/listbox';
@@ -37,6 +38,8 @@ import { SubmissionService } from './services/http-services/submission.service';
 import { SubmissionsComponent } from './pages/problem/layout/submissions/submissions.component';
 import { ProblemsComponent } from './pages/problems/problems.component';
 import { RippleModule } from 'primeng/ripple';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { StatsComponent } from './pages/problems/layout/stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,7 @@ import { RippleModule } from 'primeng/ripple';
     ResultComponent,
     SubmissionsComponent,
     ProblemsComponent,
+    StatsComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +61,7 @@ import { RippleModule } from 'primeng/ripple';
     ButtonModule,
     MonacoEditorModule,
     SkeletonModule,
+    NgChartsModule,
     // Prime NG
     ListboxModule,
     RippleModule,
@@ -66,6 +71,7 @@ import { RippleModule } from 'primeng/ripple';
     DropdownModule,
     ProgressSpinnerModule,
     ChipsModule,
+    ProgressBarModule,
   ],
   providers: [
     ThemeService,
