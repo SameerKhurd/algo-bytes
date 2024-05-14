@@ -1,3 +1,9 @@
+export enum ApplicationState {
+  COMPLETE = 0,
+  LOADING = 1,
+  ERROR = 2,
+}
+
 export enum QuestionState {
   COMPLETE = 0,
   LOADING = 1,

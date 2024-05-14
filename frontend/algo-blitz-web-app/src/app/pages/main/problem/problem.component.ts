@@ -66,7 +66,6 @@ export class ProblemComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
-    console.log(event.target.innerHeight);
     this.avialableHeight = event.target.innerHeight;
     event.target.innerWidth;
   }

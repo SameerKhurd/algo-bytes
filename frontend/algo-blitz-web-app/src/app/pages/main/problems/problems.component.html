@@ -1,0 +1,263 @@
+<div *ngIf="!outlet.isActivated">
+  <div class="brand-section border-bottom">
+    <div class="brand-section-content">
+      <div>
+        <span>
+          <i
+            class="pi pi-angle-double-up text-warning align-middle pt-1 pe-1"
+            style="font-size: 3rem"
+          ></i>
+        </span>
+
+        <span class="h1 title-algo text-light fw-light align-middle">algo</span>
+        <span class="h1 title-blitz text-warning align-middle">
+          {{ "{" }}Bytes{{ "}" }}</span
+        >
+      </div>
+      <div class="font-sm pt-2 txt-secondary h6">
+        Unleash Your Coding Power, One Byte at a Time!
+      </div>
+    </div>
+  </div>
+
+  <div class="container pt-4 mt-2">
+    <div class="d-flex flex-row">
+      <!-- Problem Table Section -->
+      <div class="align-items-centser" style="width: 85%; padding: 8px 24px">
+        <!-- Main action buttons -->
+        <div class="d-flex">
+          <div
+            *ngFor="let actionButton of mainActionButtons"
+            class="rounded-pill me-3 p-0"
+            [ngClass]="{
+              'bg-highlight': selectedMainButton !== actionButton.value
+            }"
+          >
+            <a
+              pRipple
+              class="btn btn-sm px-3 py-1 m-0 a-button rounded-pill"
+              [ngClass]="{
+                'bg-light text-dark border border-0 shadow-sm ':
+                  selectedMainButton === actionButton.value
+              }"
+              pTooltip=""
+              [routerLink]="actionButton.routerLink"
+              tooltipPosition="bottom"
+            >
+              <i
+                class="pi pe-2 align-middle"
+                style="font-size: 1rem"
+                [ngClass]="[actionButton.icon, actionButton.iconStyleClass]"
+              ></i>
+              <span
+                class="align-middle"
+                [ngClass]="
+                  selectedMainButton === actionButton.value
+                    ? 'text-dark'
+                    : 'text-light '
+                "
+                [innerHTML]="actionButton.label"
+              >
+              </span>
+            </a>
+          </div>
+          <div class="ms-auto a-button rounded-pill bg-highlight shadow-sm">
+            <button
+              pRipple
+              class="btn btn-sm px-3 py-1 rounded-pill"
+              tooltipPosition="bottom"
+              (click)="onPickAny()"
+            >
+              <i
+                class="pi pi-sync pe-2 align-middle text-success"
+                style="font-size: 0.9rem"
+              ></i>
+              <span class="align-middle text-light"> Pick Any </span>
+            </button>
+          </div>
+        </div>
+        <br />
+        <ng-container
+          *ngIf="
+            dataService.applicationState === applicationState.ERROR;
+            else mainQuestionsTemplate
+          "
+        >
+          <div
+            class="mt-4 d-flex justify-content-center rounded-4 bg-highlight"
+            style="padding-top: 10%; padding-bottom: 10%"
+          >
+            <div class="text-center">
+              <i
+                class="pi pi-exclamation-triangle text-danger"
+                style="font-size: 3rem"
+              ></i>
+              <br />
+              <div class="py-3">
+                <h5 class="text-danger pb-2 border-bottom">
+                  Something went wrong!
+                </h5>
+                <h6 class="text-danger pt-2">
+                  Error occured while fetching the list of problems.
+                </h6>
+                <h6 class="text-danger">
+                  Please retry or refresh the page after sometime
+                </h6>
+              </div>
+
+              <a
+                class="txt-secondary pointer"
+                tooltipPosition="bottom"
+                (click)="reloadPage()"
+              >
+                <i
+                  class="pi pi-replay pe-1 align-middle"
+                  style="font-size: 0.8rem"
+                ></i>
+                <span>Retry</span>
+              </a>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #mainQuestionsTemplate>
+          <p-table
+            #dt2
+            dataKey="id"
+            [rowHover]="true"
+            [lazy]="false"
+            [value]="dataService.filteredQuestions"
+            styleClass="p-datatable-sm p-datatable-striped p-2"
+            [paginator]="true"
+            [rows]="15"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} problems"
+          >
+            <ng-template pTemplate="header">
+              <tr class="font-sm txt-secondary border-bottom">
+                <th class="ps-3" style="width: 10%">Status</th>
+                <th style="width: 34%" pSortableColumn="title">Title</th>
+
+                <th style="width: 13%" pSortableColumn="acceptance">
+                  Acceptance
+                </th>
+                <th style="width: 13%" pSortableColumn="diff">Difficulty</th>
+                <th class="ps-3" style="width: 30%">Tags</th>
+
+                <th
+                  style="width: 15%"
+                  class="text-end pe-3"
+                  pSortableColumn="bookmark"
+                >
+                  Bookmark
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-question let-rowIndex="rowIndex">
+              <ng-container
+                *ngIf="
+                  dataService.applicationState === applicationState.LOADING;
+                  else tableTemplate
+                "
+              >
+                <tr *ngFor="let item of loadingArray">
+                  <td class="py-3"><p-skeleton></p-skeleton></td>
+                  <td><p-skeleton></p-skeleton></td>
+                  <td><p-skeleton></p-skeleton></td>
+                  <td><p-skeleton></p-skeleton></td>
+                  <td><p-skeleton></p-skeleton></td>
+                </tr>
+              </ng-container>
+              <ng-template #tableTemplate>
+                <tr class="font-sm">
+                  <td>
+                    <a [routerLink]="[question.qid]">
+                      <i
+                        class="pi ps-3 align-middle fw-bold"
+                        style="font-size: 0.9rem"
+                        [ngClass]="[
+                          userQuestionStatusPropeties[question.status].icon,
+                          userQuestionStatusPropeties[question.status].cssClass
+                        ]"
+                        [pTooltip]="
+                          userQuestionStatusPropeties[question.status].label
+                        "
+                        tooltipPosition="right"
+                      ></i>
+                    </a>
+                  </td>
+                  <td>
+                    <a [routerLink]="[question.qid]"> {{ question.title }}</a>
+                  </td>
+
+                  <td>
+                    <span
+                      class="px-2"
+                      pTooltip="Accepted {{ question.accepted }} out of {{
+                        question.submitted
+                      }} submissions"
+                    >
+                      {{
+                        (question.submitted > 0
+                          ? (question.accepted / question.submitted) * 100
+                          : 0
+                        ).toFixed(1)
+                      }}%</span
+                    >
+                  </td>
+                  <td>
+                    <span
+                      class="px-2 py-1 my-2"
+                      [ngClass]="
+                        difficultyLevelProperties[question.diff].cssClass
+                      "
+                    >
+                      {{ difficultyLevelProperties[question.diff].label }}
+                    </span>
+                  </td>
+
+                  <td>
+                    <small
+                      *ngFor="let tag of question.tags"
+                      class="me-2 rounded-4 border bg-highlight px-1 shadow-sm my-1 txt-secondary d-inline-block"
+                    >
+                      {{ tag }}
+                    </small>
+                  </td>
+
+                  <td class="text-end pe-4">
+                    <div>
+                      <button
+                        pRipple
+                        class="btn btn-sm p-0 px-2 rounded-pill border-0"
+                        (click)="onBookmark(rowIndex)"
+                        pTooltip="Bookmark"
+                        tooltipPosition="bottom"
+                      >
+                        <i
+                          class="pi align-middle"
+                          style="font-size: 0.85rem"
+                          [ngClass]="
+                            question.bookmark
+                              ? 'pi-star-fill text-warning'
+                              : 'pi-star txt-secondary'
+                          "
+                        ></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+            </ng-template>
+          </p-table>
+        </ng-template>
+      </div>
+
+      <!-- Stats Section -->
+      <div style="width: 15%">
+        <app-stats></app-stats>
+      </div>
+    </div>
+  </div>
+  <br />
+</div>
+<router-outlet #outlet="outlet"></router-outlet>

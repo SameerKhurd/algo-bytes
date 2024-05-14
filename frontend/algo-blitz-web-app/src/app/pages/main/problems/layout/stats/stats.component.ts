@@ -39,10 +39,9 @@ export class StatsComponent {
   };
 
   constructor(public dataService: DataService) {
-    this.dataService.statsUpdate.subscribe((status: boolean) => {
+    this.dataService.statsUpdateEvent.subscribe((status: boolean) => {
       this.doughnutChartData.datasets[0].data = this.dataService.statsChartData;
       this.chart?.chart?.update();
-      console.log(this.dataService.statsChartData);
     });
   }
 }
