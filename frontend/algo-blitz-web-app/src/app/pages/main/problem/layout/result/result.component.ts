@@ -52,7 +52,6 @@ export class ResultComponent {
     if (testResult) {
       this.currTestResult = testResult;
       this.currTestcaseIndex = 0;
-      console.log(this.currTestResult.results);
     }
   }
 

@@ -12,17 +12,17 @@ import { FormsModule } from '@angular/forms';
 // Services
 import { ThemeService } from './services/theme.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ProblemComponent } from './pages/problem/problem.component';
+import { ProblemComponent } from './pages/main/problem/problem.component';
 
 import { SplitterModule } from 'primeng/splitter';
-import { PromptComponent } from './pages/problem/layout/prompt/prompt.component';
+import { PromptComponent } from './pages/main/problem/layout/prompt/prompt.component';
 import { ChipsModule } from 'primeng/chips';
 
 import { MonacoEditorModule, MONACO_PATH } from '@materia-ui/ngx-monaco-editor';
-import { EditorComponent } from './pages/problem/layout/editor/editor.component';
+import { EditorComponent } from './pages/main/problem/layout/editor/editor.component';
 import { NgChartsModule } from 'ng2-charts';
 
-import { ResultComponent } from './pages/problem/layout/result/result.component';
+import { ResultComponent } from './pages/main/problem/layout/result/result.component';
 import { ListboxModule } from 'primeng/listbox';
 import { ButtonModule } from 'primeng/button';
 import { SkeletonModule } from 'primeng/skeleton';
@@ -35,11 +35,12 @@ import { DataService } from './services/data.service';
 import { ApplicationService } from './services/http-services/application.service';
 import { BookmarkService } from './services/http-services/bookmark.service';
 import { SubmissionService } from './services/http-services/submission.service';
-import { SubmissionsComponent } from './pages/problem/layout/submissions/submissions.component';
-import { ProblemsComponent } from './pages/problems/problems.component';
+import { SubmissionsComponent } from './pages/main/problem/layout/submissions/submissions.component';
+import { ProblemsComponent } from './pages/main/problems/problems.component';
 import { RippleModule } from 'primeng/ripple';
 import { ProgressBarModule } from 'primeng/progressbar';
-import { StatsComponent } from './pages/problems/layout/stats/stats.component';
+import { StatsComponent } from './pages/main/problems/layout/stats/stats.component';
+import { MainComponent } from './pages/main/main.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { StatsComponent } from './pages/problems/layout/stats/stats.component';
     SubmissionsComponent,
     ProblemsComponent,
     StatsComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,

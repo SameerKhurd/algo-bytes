@@ -2,6 +2,7 @@ import google.cloud.firestore
 import uuid
 
 from collection_services.config import Collection
+from datetime import datetime, timezone
 
 
 class UserService:
@@ -19,7 +20,8 @@ class UserService:
             "uid": str(uuid.uuid4()),
             "username": username,
             "email": email,
-            "pass": ""
+            "pass": "",
+            "createdAt": datetime.now(tz=timezone.utc),
         }
         self.db.collection(Collection.USERS).add(user, user["uid"])
         return user
@@ -30,6 +32,7 @@ class UserService:
                 "uid": user["uid"],
                 "username": username,
                 "email": email,
-                "pass": ""
+                "pass": "",
+                "createdAt": user["createdAt"]
             }
         )

@@ -4,6 +4,7 @@ import {
   ApplicationPayload,
   BookmarkPayload,
 } from 'src/app/interfaces/payload.interface';
+import { ApplicationState } from 'src/app/interfaces/problem-loading-state.interface';
 import {
   difficultyLevelProperties,
   userQuestionStatusPropeties,
@@ -18,24 +19,28 @@ const mainActionButtons: {
   icon: string;
   iconStyleClass: string;
   label: string;
+  routerLink: string;
   value: number;
 }[] = [
   {
     icon: 'pi-globe',
     iconStyleClass: 'text-primary',
     label: 'All Problems',
+    routerLink: '/problems',
     value: QuestionLevel.ALL,
   },
   {
     icon: 'pi-bolt',
     iconStyleClass: 'text-warning',
     label: 'Top <strong>10</strong> Problems',
+    routerLink: '/problems/top-10',
     value: QuestionLevel.TOP_10,
   },
   {
     icon: 'pi-box',
     iconStyleClass: 'text-success',
     label: 'Top <strong>25</strong> Problems',
+    routerLink: '/problems/top-25',
     value: QuestionLevel.TOP_25,
   },
 ];
@@ -46,12 +51,12 @@ const mainActionButtons: {
   styleUrls: ['./problems.component.scss'],
 })
 export class ProblemsComponent {
-  loading = true;
   loadingArray = new Array(5);
   difficultyLevelProperties: any = difficultyLevelProperties;
   userQuestionStatusPropeties: any = userQuestionStatusPropeties;
   mainActionButtons = mainActionButtons;
   selectedMainButton: QuestionLevel = QuestionLevel.ALL;
+  applicationState = ApplicationState;
 
   constructor(
     public dataService: DataService,
@@ -59,45 +64,42 @@ export class ProblemsComponent {
     private bookmarkService: BookmarkService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+    this.activatedRoute.url.subscribe((params) => {
+      switch (params[0]?.path) {
+        case 'top-10': {
+          this.selectedMainButton = QuestionLevel.TOP_10;
+          break;
+        }
+        case 'top-25': {
+          this.selectedMainButton = QuestionLevel.TOP_25;
+          break;
+        }
+        default: {
+          this.selectedMainButton = QuestionLevel.ALL;
+          break;
+        }
+      }
+      this.dataService.filterQuestions(this.selectedMainButton);
+    });
+
+    this.dataService.applicationStateEvent.subscribe(
+      (applicationState: ApplicationState) => {
+        if (applicationState === ApplicationState.COMPLETE) {
+          this.dataService.filterQuestions(this.selectedMainButton);
+          this.dataService.updateCurrQuestion();
+        }
+      }
+    );
+  }
 
   ngOnInit(): void {
-    console.log(this.dataService.questions);
-    this.getApplicationData();
+    //this.getApplicationData();
   }
 
   onMainButtonSelect(mainButtonValue: QuestionLevel) {
     this.selectedMainButton = mainButtonValue;
     this.dataService.filterQuestions(this.selectedMainButton);
-  }
-
-  private getApplicationData(): void {
-    this.loading = true;
-    const payload: ApplicationPayload = {
-      uid: this.dataService.user.uid,
-    };
-    this.dataService.addLoadingQuestion();
-    this.applicationService.getApplicationData(payload).subscribe({
-      next: (result: any) => {
-        this.dataService.user = {
-          uid: result.uid,
-          username: result.username,
-          email: result.email,
-        };
-        this.dataService.processQuestions(
-          result.questions,
-          result.userQuestions
-        );
-        this.dataService.filterQuestions(this.selectedMainButton);
-        this.dataService.check();
-        this.loading = false;
-      },
-      error: (error: any) => {
-        this.dataService.processQuestions([], []);
-        this.loading = false;
-      },
-      complete: () => {},
-    });
   }
 
   onBookmark(questionIndex: number) {
@@ -113,6 +115,10 @@ export class ProblemsComponent {
       error: (error: any) => {},
       complete: () => {},
     });
+  }
+
+  reloadPage() {
+    window.location.reload();
   }
 
   onPickAny() {

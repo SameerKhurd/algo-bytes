@@ -1,10 +1,21 @@
 a {
   color: var(--text-primary);
   text-decoration: none;
+  cursor: pointer;
 }
 
 a:hover {
   text-decoration: underline;
+}
+
+.a-button {
+  text-decoration: none;
+  border: 1px solid #3e3e3e00;
+}
+
+.a-button:hover {
+  border: 1px solid #888;
+  text-decoration: none;
 }
 
 .brand-section {

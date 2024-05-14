@@ -47,6 +47,7 @@ def _getApplicationUserData(req: https_fn.Request) -> https_fn.Response:
                 "tags": question["question"]["tags"],
                 "submitted": question["submitted"],
                 "accepted": question["accepted"],
+                "questionLevel": question["questionLevel"],
             }
         )
     userQuestions, _ = UserQuestionService(

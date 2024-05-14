@@ -6,6 +6,7 @@ import {
   UserQuestionStatus,
 } from '../interfaces/question.interface';
 import { Subject } from 'rxjs';
+import { ApplicationState } from '../interfaces/problem-loading-state.interface';
 
 export interface User {
   uid: string;
@@ -51,7 +52,9 @@ export class DataService {
   filteredQuestions: QuestionTable[] = [];
   questionTable?: QuestionTable;
   private currQid = '';
-  statsUpdate = new Subject<boolean>();
+  statsUpdateEvent = new Subject<boolean>();
+  applicationStateEvent = new Subject<ApplicationState>();
+  applicationState: ApplicationState = ApplicationState.LOADING;
 
   constructor() {
     this.initialiseProfileProblemStats();
@@ -72,6 +75,7 @@ export class DataService {
   }
 
   processQuestions(allQuestions: any, userQuestions: any) {
+    this.filteredQuestions = [];
     this.questions = allQuestions.map((question: any): QuestionTable => {
       return {
         accepted: question.accepted,
@@ -92,10 +96,10 @@ export class DataService {
           userQuestions[question.qid]! && userQuestions[question.qid]?.bookmark
             ? userQuestions[question.qid].bookmark
             : false,
-          questionLevel: QuestionLevel.ALL
+        questionLevel: question.questionLevel,
       };
     });
-    
+
     this.updateProfileProblemStats();
   }
 
@@ -115,9 +119,10 @@ export class DataService {
       this.profileProblemStats.easySolved,
       this.profileProblemStats.mediumSolved,
       this.profileProblemStats.hardSolved,
-      this.profileProblemStats.unsolved,
+      this.profileProblemStats.unsolved || 1,
     ];
-    this.statsUpdate.next(true);
+
+    this.statsUpdateEvent.next(true);
   }
 
   private initialiseProfileProblemStats() {
@@ -150,6 +155,7 @@ export class DataService {
         questionLevel: QuestionLevel.ALL,
       },
     ];
+    this.filteredQuestions = this.questions;
   }
 
   set qid(qid: string) {
@@ -157,10 +163,10 @@ export class DataService {
       this.questionTable = undefined;
     }
     this.currQid = qid;
-    this.check();
+    this.updateCurrQuestion();
   }
 
-  check() {
+  updateCurrQuestion() {
     setTimeout(() => {
       this.checkQuestionTable();
     }, 3000);
@@ -182,5 +188,10 @@ export class DataService {
       (question: QuestionTable): boolean =>
         question.questionLevel <= filterQuestionLevel
     );
+  }
+
+  setApplicationState(applicationState: ApplicationState) {
+    this.applicationState = applicationState;
+    this.applicationStateEvent.next(applicationState);
   }
 }
