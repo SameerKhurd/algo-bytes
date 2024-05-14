@@ -111,8 +111,9 @@ def _getUserQuestionSubmission(req: https_fn.Request) -> https_fn.Response:
 
     submissions, _ = UserSubmissionService(
         db=dbFirestoreClient).getUserSubmissions(uid=uid)
+
     if not submissions:
-        return https_fn.Response("No submissions found", status=400)
+        submissions = {}
 
     headers = {"Access-Control-Allow-Origin": "*"}
     return submissions.get(qid, []), 200, headers
