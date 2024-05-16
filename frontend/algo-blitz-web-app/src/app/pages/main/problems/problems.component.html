@@ -14,8 +14,32 @@
           {{ "{" }}Bytes{{ "}" }}</span
         >
       </div>
-      <div class="font-sm pt-2 txt-secondary h6">
+      <div class="font-sm pt-2 h6">
         Unleash Your Coding Power, One Byte at a Time!
+      </div>
+      <div class="font-sm pt-4 txt-secondary">
+        <small>
+          <strong>Disclaimer:</strong> This application is intended for personal
+          experimentation and learning only. The application uses questions
+          sourced directly from
+          <a
+            class="fw-s text-decoration-underline"
+            target="_blank"
+            href="https://leetcode.com/"
+            >LeetCode</a>
+          platform and is subjected to their terms of use and copyright
+          policies.
+        </small>
+      </div>
+      <div class="font-sm pt-3 txt-secondary">
+        <small>
+          Developed by <a
+          class="fw-s text-decoration-underline "
+          target="_blank"
+          href="https://leetcode.com/"
+          >Sameer Khurd
+        </a>
+        </small>
       </div>
     </div>
   </div>
@@ -30,7 +54,8 @@
             *ngFor="let actionButton of mainActionButtons"
             class="rounded-pill me-3 p-0"
             [ngClass]="{
-              'bg-highlight': selectedMainButton !== actionButton.value
+              'bg-highlight':
+                dataService.filterQuestionLevel !== actionButton.value
             }"
           >
             <a
@@ -38,7 +63,7 @@
               class="btn btn-sm px-3 py-1 m-0 a-button rounded-pill"
               [ngClass]="{
                 'bg-light text-dark border border-0 shadow-sm ':
-                  selectedMainButton === actionButton.value
+                  dataService.filterQuestionLevel === actionButton.value
               }"
               pTooltip=""
               [routerLink]="actionButton.routerLink"
@@ -52,7 +77,7 @@
               <span
                 class="align-middle"
                 [ngClass]="
-                  selectedMainButton === actionButton.value
+                  dataService.filterQuestionLevel === actionButton.value
                     ? 'text-dark'
                     : 'text-light '
                 "

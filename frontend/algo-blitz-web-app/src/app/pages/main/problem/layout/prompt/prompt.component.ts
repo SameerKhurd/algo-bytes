@@ -34,7 +34,7 @@ export class PromptComponent {
   questionState = QuestionState;
   userQuestionStatusPropeties = userQuestionStatusPropeties;
   difficultyLevelProperties: any = difficultyLevelProperties;
-  activeIndex =0
+  activeIndex = 0;
   @Input()
   set question(question: Question) {
     if (question !== undefined) {
@@ -52,10 +52,10 @@ export class PromptComponent {
     this.currQuestion.prompt = this.currQuestion.prompt.map(
       (description: string) => {
         description = description.replaceAll(
-          '<h>',
+          '{{ ',
           '<small class="bg-highlight border rounded-3 px-1 font-monospace">'
         );
-        description = description.replaceAll('</h>', '</small>');
+        description = description.replaceAll(' }}', '</small>');
         return description;
       }
     );

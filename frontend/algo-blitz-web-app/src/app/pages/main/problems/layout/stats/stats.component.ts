@@ -3,6 +3,12 @@ import { ChartConfiguration, ChartData } from 'chart.js';
 import { DataService } from 'src/app/services/data.service';
 import { BaseChartDirective } from 'ng2-charts';
 
+const questionLevelLabel = {
+  5: 'All Problems',
+  1: 'Top 10 Problems',
+  3: 'Top 25 Problems',
+};
+
 @Component({
   selector: 'app-stats',
   templateUrl: './stats.component.html',
@@ -10,7 +16,7 @@ import { BaseChartDirective } from 'ng2-charts';
 })
 export class StatsComponent {
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
-
+  questionLevelLabel = questionLevelLabel;
   public doughnutChartLabels: string[] = [
     'Easy Solved',
     'Medium Solved',

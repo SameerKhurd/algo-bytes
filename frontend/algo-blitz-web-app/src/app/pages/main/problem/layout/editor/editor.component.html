@@ -6,21 +6,42 @@
       <i class="pi pi-code pe-2 text-success align-middle fw-bold"></i>
       <span class="align-middle">Code &nbsp;&nbsp;&nbsp;</span>
     </div>
-    <div class="align-middle">Language</div>
+    <div
+      class="align-middle"
+      pTooltip="Currently only Python3 language is available"
+      tooltipPosition="bottom"
+    >
+      Language
+      <i
+        class="pi pi-info-circle align-middle ps-1 fw-bold"
+        style="font-size: 0.8rem"
+      ></i>
+    </div>
 
-    <div class="me-1 px-2 col-md-2 font-sm">
+    <div class="me-1 px-1 col-md-2 font-sm">
       <select
         class="form-select ps-2 p-0 font-sm align-middle"
+        pTooltip="Currently only Python3 language is available"
+        tooltipPosition="bottom"
         [(ngModel)]="selectedLanguage"
         [disabled]="loadingState.question === questionState.LOADING"
       >
         <option
-          *ngFor="let language of availableLanguages"
+          *ngFor="let language of availableLanguages.supported"
           [value]="language.value"
           [disabled]="language.disabled"
         >
           {{ language.label }}
         </option>
+        <optgroup label="Following langugaes are not available yet">
+          <option
+            *ngFor="let language of availableLanguages.notSupported"
+            [value]="language.value"
+            [disabled]="language.disabled"
+          >
+            {{ language.label }}
+          </option>
+        </optgroup>
       </select>
     </div>
     <div class="">
@@ -31,7 +52,10 @@
         pTooltip="Reset to default code"
         tooltipPosition="bottom"
       >
-        <i class="pi pi-replay align-middle" style="font-size: 0.8rem"></i>
+        <i
+          class="pi pi-replay align-middle text-light"
+          style="font-size: 0.8rem"
+        ></i>
       </button>
     </div>
 

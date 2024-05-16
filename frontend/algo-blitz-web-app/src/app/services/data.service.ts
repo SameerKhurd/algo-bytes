@@ -55,6 +55,7 @@ export class DataService {
   statsUpdateEvent = new Subject<boolean>();
   applicationStateEvent = new Subject<ApplicationState>();
   applicationState: ApplicationState = ApplicationState.LOADING;
+  filterQuestionLevel: QuestionLevel = QuestionLevel.ALL;
 
   constructor() {
     this.initialiseProfileProblemStats();
@@ -100,13 +101,14 @@ export class DataService {
       };
     });
 
-    this.updateProfileProblemStats();
+    this.filterQuestions();
+    //this.updateProfileProblemStats();
   }
 
   updateProfileProblemStats() {
     this.initialiseProfileProblemStats();
-    this.profileProblemStats.total = this.questions.length;
-    for (let question of this.questions) {
+    this.profileProblemStats.total = this.filteredQuestions.length;
+    for (let question of this.filteredQuestions) {
       this.profileProblemStats[DifficultySolvedMap[question.diff].total]++;
       this.profileProblemStats[UserQuestionStatusMap[question.status]]++;
       if (question.status === UserQuestionStatus.SOLVED) {
@@ -183,11 +185,17 @@ export class DataService {
     return this.currQid;
   }
 
-  filterQuestions(filterQuestionLevel: QuestionLevel) {
+  updatefilterQuestionLevel(filterQuestionLevel: QuestionLevel) {
+    this.filterQuestionLevel = filterQuestionLevel;
+    this.filterQuestions();
+  }
+
+  private filterQuestions() {
     this.filteredQuestions = this.questions.filter(
       (question: QuestionTable): boolean =>
-        question.questionLevel <= filterQuestionLevel
+        question.questionLevel <= this.filterQuestionLevel
     );
+    this.updateProfileProblemStats();
   }
 
   setApplicationState(applicationState: ApplicationState) {
