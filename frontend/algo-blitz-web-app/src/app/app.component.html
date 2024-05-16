@@ -1,4 +1,6 @@
-<nav class="navbar sticky-top cust-bg-primary navbar-expand-lg navbar-dark border-bottom">
+<nav
+  class="navbar sticky-top cust-bg-primary navbar-expand-lg navbar-dark border-bottom"
+>
   <div class="container-fluid">
     <a
       class="navbar-brand text-secondary"
@@ -29,12 +31,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item  ps-4">
+        <li class="nav-item ps-4">
           <a
-            class="nav-link active"
+            class="nav-link"
             aria-current="page"
             title="Go to all problems"
             routerLink="/problems"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
           >
             <span class="font-sm">Problems</span>
           </a>
@@ -45,6 +49,8 @@
             aria-current="page"
             title="Go to all problems"
             routerLink="/problems/top-10"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
           >
             <span class="font-sm"> Top 10 Problems</span>
           </a>
@@ -55,12 +61,24 @@
             aria-current="page"
             title="Go to all problems"
             routerLink="/problems/top-25"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
           >
             <span class="font-sm"> Top 25 Problems</span>
           </a>
         </li>
       </ul>
       <form class="d-flex">
+        <div class="font-sm align-middle pt-1 pe-3 me-3 text-light border-end">
+          <a
+            class="fw-s a-link text-light"
+            target="_blank"
+            href="https://leetcode.com/"
+          >
+            <small> System Design Blog </small>
+          </a>
+        </div>
+
         <a class="align-middle pe-3 me-3 text-light border-end" href="#">
           <i class="pi align-middle pi-github" style="font-size: 1rem"></i
         ></a>
@@ -73,7 +91,7 @@
           <i class="pi align-middle pi-linkedin" style="font-size: 1rem"></i
         ></a>
 
-        <div class="font-sm align-middle">
+        <div class="font-sm align-middle pt-1">
           <small>
             Logged in as <strong>{{ dataService.user.username }}</strong>
           </small>

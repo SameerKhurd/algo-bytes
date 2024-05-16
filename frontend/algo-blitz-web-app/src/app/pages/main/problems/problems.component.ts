@@ -55,7 +55,7 @@ export class ProblemsComponent {
   difficultyLevelProperties: any = difficultyLevelProperties;
   userQuestionStatusPropeties: any = userQuestionStatusPropeties;
   mainActionButtons = mainActionButtons;
-  selectedMainButton: QuestionLevel = QuestionLevel.ALL;
+  //selectedMainButton: QuestionLevel = QuestionLevel.ALL;
   applicationState = ApplicationState;
 
   constructor(
@@ -68,25 +68,23 @@ export class ProblemsComponent {
     this.activatedRoute.url.subscribe((params) => {
       switch (params[0]?.path) {
         case 'top-10': {
-          this.selectedMainButton = QuestionLevel.TOP_10;
+          this.dataService.updatefilterQuestionLevel(QuestionLevel.TOP_10);
           break;
         }
         case 'top-25': {
-          this.selectedMainButton = QuestionLevel.TOP_25;
+          this.dataService.updatefilterQuestionLevel(QuestionLevel.TOP_25);
           break;
         }
         default: {
-          this.selectedMainButton = QuestionLevel.ALL;
+          this.dataService.updatefilterQuestionLevel(QuestionLevel.ALL);
           break;
         }
       }
-      this.dataService.filterQuestions(this.selectedMainButton);
     });
 
     this.dataService.applicationStateEvent.subscribe(
       (applicationState: ApplicationState) => {
         if (applicationState === ApplicationState.COMPLETE) {
-          this.dataService.filterQuestions(this.selectedMainButton);
           this.dataService.updateCurrQuestion();
         }
       }
@@ -98,8 +96,8 @@ export class ProblemsComponent {
   }
 
   onMainButtonSelect(mainButtonValue: QuestionLevel) {
-    this.selectedMainButton = mainButtonValue;
-    this.dataService.filterQuestions(this.selectedMainButton);
+    this.dataService.updatefilterQuestionLevel(mainButtonValue);
+    //this.dataService.filterQuestions(this.selectedMainButton);
   }
 
   onBookmark(questionIndex: number) {

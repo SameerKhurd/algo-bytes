@@ -10,42 +10,51 @@ import {
   programmingLanguages,
 } from 'src/app/interfaces/question.interface';
 
-const availableLanguages: {
+interface Language {
   value: ProgrammingLanguage;
   disabled: boolean;
   label: string;
-}[] = [
-  {
-    value: ProgrammingLanguage.PYTHON3,
-    disabled: false,
-    label: programmingLanguages[ProgrammingLanguage.PYTHON3].label,
-  },
-  {
-    value: ProgrammingLanguage.JAVA,
-    disabled: true,
-    label: programmingLanguages[ProgrammingLanguage.JAVA].label,
-  },
-  {
-    value: ProgrammingLanguage.C,
-    disabled: true,
-    label: programmingLanguages[ProgrammingLanguage.C].label,
-  },
-  {
-    value: ProgrammingLanguage.CPP,
-    disabled: true,
-    label: programmingLanguages[ProgrammingLanguage.CPP].label,
-  },
-  {
-    value: ProgrammingLanguage.JAVASCRIPT,
-    disabled: true,
-    label: programmingLanguages[ProgrammingLanguage.JAVASCRIPT].label,
-  },
-  {
-    value: ProgrammingLanguage.TYPESCRIPT,
-    disabled: true,
-    label: programmingLanguages[ProgrammingLanguage.TYPESCRIPT].label,
-  },
-];
+}
+
+const availableLanguages: {
+  supported: Language[];
+  notSupported: Language[];
+} = {
+  supported: [
+    {
+      value: ProgrammingLanguage.PYTHON3,
+      disabled: false,
+      label: programmingLanguages[ProgrammingLanguage.PYTHON3].label,
+    },
+  ],
+  notSupported: [
+    {
+      value: ProgrammingLanguage.JAVA,
+      disabled: true,
+      label: programmingLanguages[ProgrammingLanguage.JAVA].label,
+    },
+    {
+      value: ProgrammingLanguage.C,
+      disabled: true,
+      label: programmingLanguages[ProgrammingLanguage.C].label,
+    },
+    {
+      value: ProgrammingLanguage.CPP,
+      disabled: true,
+      label: programmingLanguages[ProgrammingLanguage.CPP].label,
+    },
+    {
+      value: ProgrammingLanguage.JAVASCRIPT,
+      disabled: true,
+      label: programmingLanguages[ProgrammingLanguage.JAVASCRIPT].label,
+    },
+    {
+      value: ProgrammingLanguage.TYPESCRIPT,
+      disabled: true,
+      label: programmingLanguages[ProgrammingLanguage.TYPESCRIPT].label,
+    },
+  ],
+};
 
 @Component({
   selector: 'app-editor',
@@ -65,7 +74,7 @@ export class EditorComponent {
   };
   userCode: string = '';
   availableLanguages = availableLanguages;
-  selectedLanguage = this.availableLanguages[0].value;
+  selectedLanguage = this.availableLanguages.supported[0].value;
   currfunctionArguments: string[] = [];
 
   @Input()

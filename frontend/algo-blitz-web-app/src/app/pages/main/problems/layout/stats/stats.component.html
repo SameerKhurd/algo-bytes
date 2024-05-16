@@ -3,6 +3,9 @@
   style="padding: 12px 12px"
 >
   <div class="font-sm"><strong>Your Stats</strong></div>
+  <div class="font-sm txt-secondary pt-1">
+    {{ questionLevelLabel[dataService.filterQuestionLevel] }}
+  </div>
 
   <div class="text-center p-4">
     <canvas
@@ -25,7 +28,7 @@
       <span class="h6"> / {{ dataService.profileProblemStats.total }} </span>
     </div>
   </div>
-  <div class="fw-sbold font-sm txt-secondsary">Solved Problems</div>
+  <div class="font-sm txt-secondsary">Solved Problems</div>
   <div class="font-sm txt-secondary pt-3">
     <small> {{ dataService.profileProblemStats.attempted }} Attempted</small>
   </div>
