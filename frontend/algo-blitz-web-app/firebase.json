@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "algobytes",
     "public": "dist/algo-blitz-web-app",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
