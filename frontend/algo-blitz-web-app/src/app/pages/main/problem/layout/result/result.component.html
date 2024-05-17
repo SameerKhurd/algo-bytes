@@ -187,6 +187,18 @@
               >
             </div>
           </div>
+          <br />
+          <div
+            class="py-2"
+            *ngIf="currTestResult.results[currTestcaseIndex].stderr"
+          >
+            <strong> Stderr: </strong>
+            <div
+              class="font-monospace bg-highlight rounded-2 px-2 my-2 mx-1 p-1 text-danger"
+            >
+              {{ currTestResult.results[currTestcaseIndex].stderr }} &nbsp;
+            </div>
+          </div>
 
           <div class="py-2">
             <strong> Input: </strong>
@@ -231,15 +243,6 @@
               class="font-monospace bg-highlight rounded-2 px-2 my-2 mx-1 p-1"
             >
               {{ currTestResult.results[currTestcaseIndex].stdout }} &nbsp;
-            </div>
-          </div>
-
-          <div class="py-2">
-            <strong> Stderr: </strong>
-            <div
-              class="font-monospace bg-highlight rounded-2 px-2 my-2 mx-1 p-1"
-            >
-              {{ currTestResult.results[currTestcaseIndex].stderr }} &nbsp;
             </div>
           </div>
         </div>
