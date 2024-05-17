@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "algo-blitz-web-app": {
+    "algo-bytes-web-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/algo-blitz-web-app",
+            "outputPath": "dist/algo-bytes-web-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "algo-blitz-web-app:build:production"
+              "browserTarget": "algo-bytes-web-app:build:production"
             },
             "development": {
-              "browserTarget": "algo-blitz-web-app:build:development"
+              "browserTarget": "algo-bytes-web-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "algo-blitz-web-app:build"
+            "browserTarget": "algo-bytes-web-app:build"
           }
         },
         "test": {

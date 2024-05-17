@@ -9,7 +9,7 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'algo-blitz-web-app';
+  title = 'algo-bytes-web-app';
 
   constructor(
     private themeService: ThemeService,
