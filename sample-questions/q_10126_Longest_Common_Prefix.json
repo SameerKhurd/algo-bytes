@@ -1,0 +1,42 @@
+{
+  "question": {
+    "qid": "q_10126",
+    "diff": 1,
+    "tags": ["String"],
+    "title": "Longest Common Prefix",
+    "prompt": [
+      "Write a function to find the longest common prefix string amongst an array of strings.",
+      "If there is no common prefix, return an empty string {{ \"\" }}."
+    ],
+    "examples": [
+      {
+        "input": "[\"flower\",\"flow\",\"flight\"]",
+        "output": "\"fl\"",
+        "explanations": ["The longest common prefix is \"fl\"."]
+      },
+      {
+        "input": "[\"dog\",\"racecar\",\"car\"]",
+        "output": "\"\"",
+        "explanations": [
+          "There is no common prefix among the input strings, thus the result is an empty string \"\"."
+        ]
+      }
+    ],
+    "constraints": ["All given inputs are in lowercase letters \"a-z\"."],
+    "functionArguments": ["strs"],
+    "hints": [
+      "Try to think of the problem in terms of matching characters from the beginning of the strings."
+    ]
+  },
+  "testcases": [
+    {
+      "tid": "1",
+      "input": [["flower", "flow", "flight"]],
+      "expected": "fl"
+    },
+    { "tid": "2", "input": [["dog", "racecar", "car"]], "expected": "" }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 1
+}

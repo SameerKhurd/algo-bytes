@@ -1,0 +1,40 @@
+{
+  "question": {
+    "qid": "q_10133",
+    "diff": 2,
+    "tags": ["Array", "Dynamic Programming", "Greedy"],
+    "title": "Best Time to Buy and Sell Stock II",
+    "prompt": [
+      "Say you have an array for which the ith element is the price of a given stock on day {{ i }}.",
+      "Design an algorithm to find the maximum {{ profit }}. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times).",
+      "Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again)."
+    ],
+    "examples": [
+      {
+        "input": "[7,1,5,3,6,4]",
+        "output": "7",
+        "explanations": [
+          "Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.",
+          "Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3."
+        ]
+      },
+      {
+        "input": "[1,2,3,4,5]",
+        "output": "4",
+        "explanations": [
+          "In this case, no transaction is done because the prices keep increasing."
+        ]
+      }
+    ],
+    "constraints": ["1 <= prices.length <= 3 * 10^4", "0 <= prices[i] <= 10^4"],
+    "functionArguments": ["prices"],
+    "hints": ["The solution is a simple peak-valley approach."]
+  },
+  "testcases": [
+    { "tid": "1", "input": [[7, 1, 5, 3, 6, 4]], "expected": 7 },
+    { "tid": "2", "input": [[1, 2, 3, 4, 5]], "expected": 4 }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 3
+}

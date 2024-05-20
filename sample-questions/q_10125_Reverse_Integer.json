@@ -1,0 +1,50 @@
+{
+  "question": {
+    "qid": "q_10125",
+    "diff": 2,
+    "tags": ["Math"],
+    "title": "Reverse Integer",
+    "prompt": [
+      "Given a {{ 32-bit }} signed integer, reverse digits of an integer.",
+      "Note:",
+      "Assume we are dealing with an environment that could only store integers within the {{ 32-bit }} signed integer range: {{ [-2^31,  2^31 - 1] }}. For the purpose of this problem, assume that your function returns {{ 0 }} when the reversed integer overflows."
+    ],
+    "examples": [
+      {
+        "input": "123",
+        "output": "321",
+        "explanations": ["The input integer is 123. Reverse it and return 321."]
+      },
+      {
+        "input": "-123",
+        "output": "-321",
+        "explanations": [
+          "The input integer is -123. Reverse it and return -321."
+        ]
+      },
+      {
+        "input": "120",
+        "output": "21",
+        "explanations": [
+          "The input integer is 120. Reverse it and return 21. Note that the reversed integer has no leading zeroes."
+        ]
+      }
+    ],
+    "constraints": ["\u22122^31 <= x <= 2^31 \u2212 1"],
+    "functionArguments": ["x"],
+    "hints": [
+      "To reverse the integer, you can convert it to a string first.",
+      "Handle the negative sign if the integer is negative.",
+      "Check for integer overflow while reversing."
+    ]
+  },
+  "testcases": [
+    { "tid": "1", "input": [123], "expected": 321 },
+    { "tid": "2", "input": [-123], "expected": -321 },
+    { "tid": "3", "input": [120], "expected": 21 },
+    { "tid": "4", "input": [0], "expected": 0 }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 5
+}

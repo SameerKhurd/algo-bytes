@@ -1,0 +1,84 @@
+{
+  "question": {
+    "qid": "q_10124",
+    "diff": 3,
+    "tags": ["Array", "Binary Search", "Divide and Conquer"],
+    "title": "Median of Two Sorted Arrays",
+    "prompt": [
+      "There are two sorted arrays {{ nums1 }} and {{ nums2 }} of size {{ m }} and {{ n }} respectively.",
+      "Find the median of the two sorted arrays. The overall run time complexity should be {{ O(log(m+n)) }}.",
+      "You may assume {{ nums1 }} and {{ nums2 }} cannot be both empty."
+    ],
+    "examples": [
+      {
+        "input": "[1,3],[2]",
+        "output": "2.00000",
+        "explanations": [
+          "median is 2. Explanation: The merged array is [1,2,3] and the median is 2."
+        ]
+      },
+      {
+        "input": "[1,2],[3,4]",
+        "output": "2.50000",
+        "explanations": [
+          "median is (2 + 3) / 2 = 2.5. Explanation: The merged array is [1,2,3,4] and the median is 2.5."
+        ]
+      },
+      {
+        "input": "[0,0],[0,0]",
+        "output": "0.00000",
+        "explanations": [
+          "median is 0. Explanation: The merged array is [0,0,0,0] and the median is 0."
+        ]
+      },
+      {
+        "input": "[],[1]",
+        "output": "1.00000",
+        "explanations": [
+          "median is 1. Explanation: The merged array is [1] and the median is 1."
+        ]
+      },
+      {
+        "input": "[2],[]",
+        "output": "2.00000",
+        "explanations": [
+          "median is 2. Explanation: The merged array is [2] and the median is 2."
+        ]
+      }
+    ],
+    "constraints": [
+      "nums1.length >= 0",
+      "nums2.length <= 1000",
+      "nums1 and nums2 are sorted arrays of integers"
+    ],
+    "functionArguments": ["nums1", "nums2"],
+    "hints": [
+      "The naive approach is to merge the two arrays and then find the median. Can you improve the time complexity?",
+      "If you know the lengths of the two arrays, you might be able to find the median without fully merging them."
+    ]
+  },
+  "testcases": [
+    { "tid": "1", "input": [[1, 3], [2]], "expected": 2.0 },
+    {
+      "tid": "2",
+      "input": [
+        [1, 2],
+        [3, 4]
+      ],
+      "expected": 2.5
+    },
+    {
+      "tid": "3",
+      "input": [
+        [0, 0],
+        [0, 0]
+      ],
+      "expected": 0.0
+    },
+    { "tid": "4", "input": [[], [1]], "expected": 1.0 },
+    { "tid": "5", "input": [[2], []], "expected": 2.0 }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 3
+}

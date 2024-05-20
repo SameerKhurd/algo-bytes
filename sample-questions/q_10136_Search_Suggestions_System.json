@@ -1,0 +1,52 @@
+{
+  "question": {
+    "qid": "q_10136",
+    "diff": 2,
+    "tags": ["Hash Table", "String"],
+    "title": "Search Suggestions System",
+    "prompt": [
+      "Given an array of strings {{ products }} and a string {{ searchWord }}, we want to design a system that suggests at most three product names from {{ products }} after each character of {{ searchWord }} is typed. Suggested {{ products }} should have common prefix with the search word. If there are more than three products with a common prefix return the three lexicographically minimums products.",
+      "Return list of lists of the suggested {{ products }} after each character of {{ searchWord }} is typed."
+    ],
+    "examples": [
+      {
+        "input": "[\"mobile\",\"mouse\",\"moneypot\",\"monitor\",\"mousepad\"], \"mouse\"",
+        "output": "[[\"mobile\",\"moneypot\",\"monitor\"],[\"mobile\",\"moneypot\",\"monitor\"],[\"mouse\",\"mousepad\"],[\"mouse\",\"mousepad\"],[\"mouse\",\"mousepad\"]]",
+        "explanations": [
+          "After typing m and mo all products match and we show user [mobile, moneypot, monitor]. After typing mou, mous and mouse the system suggests [mouse, mousepad]."
+        ]
+      }
+    ],
+    "constraints": [
+      "1 <= products.length <= 1000",
+      "1 <= \u03a3 products[i].length <= 2 * 10^4",
+      "1 <= searchWord.length <= 1000",
+      "products[i] consists of only lowercase English letters.",
+      "searchWord consists of only lowercase English letters."
+    ],
+    "functionArguments": ["products", "searchWord"],
+    "hints": [
+      "Think of a suitable data structure to store the products for efficient prefix matching.",
+      "How can you utilize sorting and binary search to optimize the suggestions?"
+    ]
+  },
+  "testcases": [
+    {
+      "tid": "Example 1",
+      "input": [
+        ["mobile", "mouse", "moneypot", "monitor", "mousepad"],
+        "mouse"
+      ],
+      "expected": [
+        ["mobile", "moneypot", "monitor"],
+        ["mobile", "moneypot", "monitor"],
+        ["mouse", "mousepad"],
+        ["mouse", "mousepad"],
+        ["mouse", "mousepad"]
+      ]
+    }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 3
+}

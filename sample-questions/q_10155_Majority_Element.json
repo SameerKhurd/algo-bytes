@@ -1,0 +1,32 @@
+{
+  "question": {
+    "qid": "q_10155",
+    "diff": 1,
+    "tags": ["Array", "Divide and Conquer", "Bit Manipulation"],
+    "title": "Majority Element",
+    "prompt": [
+      "Given an array of integers, find the {{ element }} that appears more than {{ n/2 }} times."
+    ],
+    "examples": [
+      {
+        "input": "[3,2,3]",
+        "output": "3",
+        "explanations": [
+          "In the given array, the element 3 appears more than \u230a3/2\u230b = 1 times."
+        ]
+      }
+    ],
+    "constraints": [
+      "You may assume that the array is non-empty and the majority element always exist in the array."
+    ],
+    "functionArguments": ["nums"],
+    "hints": ["Try to cancel out all elements except one."]
+  },
+  "testcases": [
+    { "tid": "1", "input": [[3, 2, 3]], "expected": 3 },
+    { "tid": "2", "input": [[2, 2, 1, 1, 1, 2, 2]], "expected": 2 }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 5
+}

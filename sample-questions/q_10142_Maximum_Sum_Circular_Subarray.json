@@ -1,0 +1,33 @@
+{
+  "question": {
+    "qid": "q_10142",
+    "diff": 2,
+    "tags": ["Binary Search"],
+    "title": "Maximum Sum Circular Subarray",
+    "prompt": [
+      "Given a circular array {{ A }} of integers represented by {{ A }}, find the maximum possible sum of a non-empty subarray of {{ A }}.",
+      "Here, a circular array means the end of the array connects to the beginning of the array.",
+      "Also, a subarray may only include each element of the fixed buffer {{ A }} at most once.",
+      "Formally, for a subarray {{ A[i], A[i + 1], ..., A[j] }} where {{ 0 <= i <= j < n }}, {{ A[j+1] }} is considered to be {{ A[0] }} after {{ A[n-1] }}."
+    ],
+    "examples": [
+      {
+        "input": "[1,-2,3,-2]",
+        "output": "3",
+        "explanations": ["Subarray [3] has maximum sum 3"]
+      }
+    ],
+    "constraints": [
+      "The length of A will be in the range [1, 30000].",
+      "The elements of A will be in the range [-30000, 30000]."
+    ],
+    "functionArguments": ["A"],
+    "hints": [
+      "For a normal subarray (not a circular one), you would use Kadane's algorithm. Here, since the array is circular, you need to consider the possibility of wrapping around from the end to the beginning."
+    ]
+  },
+  "testcases": [{ "tid": "1", "input": [[1, -2, 3, -2]], "expected": 3 }],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 3
+}

@@ -1,0 +1,42 @@
+{
+  "question": {
+    "qid": "q_10135",
+    "diff": 3,
+    "tags": ["Array", "Dynamic Programming"],
+    "title": "Best Time to Buy and Sell Stock IV",
+    "prompt": [
+      "Say you have an array for which the ith element is the price of a given stock on day {{ i }}.",
+      "Design an algorithm to find the maximum {{ profit }}. You may complete at most k transactions.",
+      "Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again)."
+    ],
+    "examples": [
+      {
+        "input": "2\n[2,4,1]",
+        "output": "2",
+        "explanations": [
+          "Buy on day 1 (price = 2) and sell on day 2 (price = 4), profit = 4-2 = 2."
+        ]
+      },
+      {
+        "input": "2\n[3,2,6,5,0,3]",
+        "output": "7",
+        "explanations": [
+          "Buy on day 2 (price = 2) and sell on day 3 (price = 6), profit = 6-2 = 4.",
+          "Then buy on day 5 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3."
+        ]
+      }
+    ],
+    "constraints": ["0 <= k <= 100", "0 <= prices[i] <= 1000"],
+    "functionArguments": ["k", "prices"],
+    "hints": [
+      "You may need to optimize your solution to O(n^2) time complexity."
+    ]
+  },
+  "testcases": [
+    { "tid": "1", "input": [2, [2, 4, 1]], "expected": 2 },
+    { "tid": "2", "input": [2, [3, 2, 6, 5, 0, 3]], "expected": 7 }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 1
+}

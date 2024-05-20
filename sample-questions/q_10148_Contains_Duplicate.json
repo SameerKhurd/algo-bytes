@@ -1,0 +1,52 @@
+{
+  "question": {
+    "qid": "q_10148",
+    "diff": 1,
+    "tags": ["Hash Table"],
+    "title": "Contains Duplicate",
+    "prompt": [
+      "Given an array of integers, and an integer {{ k }}, return true if there are two distinct indices {{ i }} and {{ j }} in the array such that {{ nums[i] == nums[j] }} and {{ |i - j| <= k }}."
+    ],
+    "examples": [
+      {
+        "input": "[1,2,3,1], 3",
+        "output": "true",
+        "explanations": [
+          "In this example, there are two 1s with index difference 3, so the answer is true."
+        ]
+      },
+      {
+        "input": "[1,0,1,1], 1",
+        "output": "true",
+        "explanations": [
+          "In this example, there are two 1s with index difference 1, so the answer is true."
+        ]
+      },
+      {
+        "input": "[1,2,3,1,2,3], 2",
+        "output": "false",
+        "explanations": [
+          "In this example, there are no two 1s or two 2s with index difference 2, so the answer is false."
+        ]
+      }
+    ],
+    "constraints": [
+      "0 <= nums.length <= 10^5",
+      "-10^9 <= nums[i] <= 10^9",
+      "0 <= k <= 10^5"
+    ],
+    "functionArguments": ["nums", "k"],
+    "hints": [
+      "Consider using a hash set to store the seen elements and their indices.",
+      "For each element, check if it exists in the hash set. If it does, check if the difference in indices is less than or equal to k."
+    ]
+  },
+  "testcases": [
+    { "tid": "1", "input": [[1, 2, 3, 1], 3], "expected": true },
+    { "tid": "2", "input": [[1, 0, 1, 1], 1], "expected": true },
+    { "tid": "3", "input": [[1, 2, 3, 1, 2, 3], 2], "expected": false }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 3
+}

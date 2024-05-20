@@ -1,0 +1,41 @@
+{
+  "question": {
+    "qid": "q_10139",
+    "diff": 2,
+    "tags": ["Stack"],
+    "title": "Daily Temperatures",
+    "prompt": [
+      "Given a list of daily {{ temperatures }}, return a list such that, for each day in the input, tells you how many days you would have to wait until a warmer temperature. If there is no future day for which this is possible, put {{ 0 }} instead.",
+      "For each day, the information should be in the form of list where the element at index {{ i }} is the number of days you would have to wait until a warmer temperature after the {{ i-th }} day."
+    ],
+    "examples": [
+      {
+        "input": "[73, 74, 75, 71, 69, 72, 76, 73]",
+        "output": "[1, 1, 4, 2, 1, 1, 0, 0]",
+        "explanations": [
+          "For example, the answer for the 6-th index is 1, because on the 7-th day you have a warmer temperature of 76."
+        ]
+      }
+    ],
+    "constraints": [
+      "1 <= temperatures.length <= 10^5",
+      "30 <= temperatures[i] <= 100",
+      "It is guaranteed that the answer list will be non-empty."
+    ],
+    "functionArguments": ["temperatures"],
+    "hints": [
+      "How can you efficiently keep track of the past temperatures?",
+      "Think of using a stack to store the indices of the past temperatures."
+    ]
+  },
+  "testcases": [
+    {
+      "tid": "Example 1",
+      "input": [[73, 74, 75, 71, 69, 72, 76, 73]],
+      "expected": [1, 1, 4, 2, 1, 1, 0, 0]
+    }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 3
+}

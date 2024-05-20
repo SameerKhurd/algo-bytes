@@ -1,0 +1,39 @@
+{
+  "question": {
+    "qid": "q_10159",
+    "diff": 2,
+    "tags": ["Dynamic Programming", "Heap", "Priority Queue"],
+    "title": "Coin Change",
+    "prompt": [
+      "You are given an integer array {{ coins }} representing coins of different denominations and an integer {{ amount }} representing a total amount of money.",
+      "Return the minimum number of coins that you need to make up that amount.",
+      "If that amount of money cannot be made up by any combination of the coins, return {{ -1 }}."
+    ],
+    "examples": [
+      {
+        "input": "[1, 2, 5], 11",
+        "output": "3",
+        "explanations": ["11 = 5 + 5 + 1"]
+      }
+    ],
+    "constraints": [
+      "1 <= coins.length <= 12",
+      "1 <= coins[i] <= 2^31 - 1",
+      "0 <= amount <= 10^4"
+    ],
+    "functionArguments": ["coins", "amount"],
+    "hints": [
+      "Dynamic Programming",
+      "Breadth-First Search",
+      "Memoization",
+      "Recursion"
+    ]
+  },
+  "testcases": [
+    { "tid": "1", "input": [[1, 2, 5], 11], "expected": 3 },
+    { "tid": "2", "input": [[2], 3], "expected": -1 }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 5
+}
