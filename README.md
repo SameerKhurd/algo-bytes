@@ -7,7 +7,7 @@ This repository contains the codebase for a LeetCode-like coding platform **Algo
 
 ### Demo
 
-Checkout&nbsp; [Live Demo : &nbsp; algobytes.web.app ](https://algobytes.web.app/)
+Checkout&nbsp; [Live Demo : &nbsp;algobytes.web.app ](https://algobytes.web.app/)
 
 ### System Design Blog
 
@@ -22,12 +22,25 @@ For a detailed explanation of the system design and implementation, checkout [Sy
 - [Overview](#overview)
 - [Demo](#demo)
 - [System Design Blog](#system-design-blog)
+- [Technology Stack](#technology-stack)
 - [Frontend Setup](#frontend-setup)
 - [Backend Setup](#backend-setup)
 - [Deployment](#deployment)
 - [Contributing](#contributing)
 - [Sample Questions](./sample-questions/)
-- [Screenshots](./screenshots/)
+- [Screenshots](#screenshots)
+
+
+## Technology Stack
+
+- **Frontend**: Angular, Bootstrap 5, PrimeNG, ngx-monaco-editor, ng2-chart
+- **Backend**: Python, GCP Cloud Functions (Serverless)
+- **Database**: GCP Firestore (NoSQL)
+- **Hosting**: Firebase Hosting
+- **APIs**: RESTful APIs
+
+
+
 
 ## Frontend Setup
 
@@ -156,3 +169,4 @@ For a detailed explanation of the system design and implementation, checkout [Sy
 
 - Question Page - Runtime Error Result
   ![Question Page - Runtime Error](screenshots/6_Runtime_Error_Code_Execution.png)
+[More Screenshots](./screenshots/)
