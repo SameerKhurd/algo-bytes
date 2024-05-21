@@ -30,7 +30,6 @@ For a detailed explanation of the system design and implementation, checkout [Sy
 - [Sample Questions](./sample-questions/)
 - [Screenshots](#screenshots)
 
-
 ## Technology Stack
 
 - **Frontend**: Angular, Bootstrap 5, PrimeNG, ngx-monaco-editor, ng2-chart
@@ -38,9 +37,6 @@ For a detailed explanation of the system design and implementation, checkout [Sy
 - **Database**: GCP Firestore (NoSQL)
 - **Hosting**: Firebase Hosting
 - **APIs**: RESTful APIs
-
-
-
 
 ## Frontend Setup
 
@@ -107,9 +103,9 @@ For a detailed explanation of the system design and implementation, checkout [Sy
    ```
 3. Navigate to backend code directory:
    ```sh
-   cd serverless-api-functions/functions
+   cd api-functions-serverless/functions
    ```
-4. [Recommended] Create a virtual environment and activate it:
+4. Create a virtual environment and activate it:
    ```sh
    python3.12 -m venv venv
    source venv/bin/activate
@@ -118,12 +114,27 @@ For a detailed explanation of the system design and implementation, checkout [Sy
    ```sh
    pip install -r requirements.txt
    ```
+### Setting up local firestore and cloud functions using firebase emulator
+1. Firebase Login - log in via the browser and authenticate the Firebase CLI.
+   ```sh
+   cd api-functions-serverless/
+   firebase login
+   ```
+1. Follow step mentioned for initializing and setting up firestore in the [documentation](https://firebase.google.com/docs/functions/get-started?gen=2nd#initialize-your-project)
+   ```sh
+   firebase init firestore
+   ```
+1. Initialize firebase functions.
+   ```sh
+   firebase init functions
+   ```
+
 
 ### Running Locally
 
 1. Start the backend server:
    ```sh
-   cd backend
+   cd api-functions-serverless/
    firebase emulators:start
    ```
 
@@ -169,4 +180,4 @@ For a detailed explanation of the system design and implementation, checkout [Sy
 
 - Question Page - Runtime Error Result
   ![Question Page - Runtime Error](screenshots/6_Runtime_Error_Code_Execution.png)
-[More Screenshots](./screenshots/)
+  [More Screenshots](./screenshots/)
