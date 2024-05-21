@@ -1,0 +1,46 @@
+{
+  "question": {
+    "qid": "q_10153",
+    "diff": 2,
+    "tags": ["Dynamic Programming"],
+    "title": "Jump Game",
+    "prompt": [
+      "Given an array of non-negative integers {{ nums }}, you are initially positioned at the first index of the array.",
+      "Each element in the array represents your maximum jump length at that position.",
+      "Your goal is to reach the last index in the minimum number of jumps.",
+      "You can assume that you can always reach the last index."
+    ],
+    "examples": [
+      {
+        "input": "[2,3,1,1,4]",
+        "output": "2",
+        "explanations": [
+          "The minimum number of jumps to reach the last index is 2.",
+          "Jump 1 step from index 0 to 1, then 3 steps to the last index."
+        ]
+      },
+      {
+        "input": "[2,3,0,1,4]",
+        "output": "2",
+        "explanations": [
+          "The minimum number of jumps to reach the last index is 2.",
+          "Jump 1 step from index 0 to 1, then 4 steps to the last index."
+        ]
+      }
+    ],
+    "constraints": ["1 <= nums.length <= 1000", "0 <= nums[i] <= 10^5"],
+    "functionArguments": ["nums"],
+    "hints": [
+      "Try to model the problem using dynamic programming.",
+      "Initialize an array to store the minimum number of jumps required to reach each index.",
+      "Iterate through the array and update the minimum jumps needed for each index based on previous jumps."
+    ]
+  },
+  "testcases": [
+    { "tid": "1", "input": [[2, 3, 1, 1, 4]], "expected": 2 },
+    { "tid": "2", "input": [[2, 3, 0, 1, 4]], "expected": 2 }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 1
+}

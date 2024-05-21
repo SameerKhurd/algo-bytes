@@ -1,0 +1,46 @@
+{
+  "question": {
+    "qid": "q_10146",
+    "diff": 2,
+    "tags": ["Dynamic Programming"],
+    "title": "Palindrome Partitioning",
+    "prompt": [
+      "Given a string {{ s }}, partition {{ s }} such that every substring of the partition is a palindrome.",
+      "Return all possible palindrome partitioning of {{ s }}."
+    ],
+    "examples": [
+      {
+        "input": "\"aab\"",
+        "output": "[[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]",
+        "explanations": [
+          "The palindrome partitions are [[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]."
+        ]
+      },
+      {
+        "input": "\"a\"",
+        "output": "[[\"a\"]]",
+        "explanations": ["The palindrome partitions are [[\"a\"]]."]
+      }
+    ],
+    "constraints": [
+      "1 <= s.length <= 16",
+      "s contains only lowercase English letters."
+    ],
+    "functionArguments": ["s"],
+    "hints": ["Try to break the problem into smaller subproblems."]
+  },
+  "testcases": [
+    {
+      "tid": "1",
+      "input": ["aab"],
+      "expected": [
+        ["a", "a", "b"],
+        ["aa", "b"]
+      ]
+    },
+    { "tid": "2", "input": ["a"], "expected": [["a"]] }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 3
+}

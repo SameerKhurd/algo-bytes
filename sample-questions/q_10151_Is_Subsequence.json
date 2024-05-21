@@ -1,0 +1,42 @@
+{
+  "question": {
+    "qid": "q_10151",
+    "diff": 2,
+    "tags": ["Two Pointers", "String"],
+    "title": "Is Subsequence",
+    "prompt": [
+      "Given two strings {{ s }} and {{ t }}, return true if {{ s }} is a subsequence of {{ t }}, or false otherwise.",
+      "A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters.",
+      "For example, {{ 'ace' }} is a subsequence of {{ 'abcde' }} but {{ 'aec' }} is not."
+    ],
+    "examples": [
+      {
+        "input": "\"abc\"",
+        "output": "\"ahbgdc\"",
+        "explanations": ["Input: s = \"abc\", t = \"ahbgdc\"", "Output: true"]
+      },
+      {
+        "input": "\"axc\"",
+        "output": "\"ahbgdc\"",
+        "explanations": ["Input: s = \"axc\", t = \"ahbgdc\"", "Output: false"]
+      }
+    ],
+    "constraints": [
+      "1 <= s.length <= 100",
+      "1 <= t.length <= 10^4",
+      "s and t consist only of lowercase English letters."
+    ],
+    "functionArguments": ["s", "t"],
+    "hints": [
+      "Try to use two pointers to solve this problem.",
+      "Can you optimize your solution by using only O(1) extra space?"
+    ]
+  },
+  "testcases": [
+    { "tid": "1", "input": ["\"abc\"", "\"ahbgdc\""], "expected": true },
+    { "tid": "2", "input": ["\"axc\"", "\"ahbgdc\""], "expected": false }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 5
+}

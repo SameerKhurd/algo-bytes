@@ -1,0 +1,46 @@
+{
+  "question": {
+    "qid": "q_10129",
+    "diff": 2,
+    "tags": ["Array"],
+    "title": "4Sum",
+    "prompt": [
+      "Given an array {{ nums }} of n integers, return an array of all the unique quadruplets {{ [nums[a], nums[b], nums[c], nums[d]] }} such that:",
+      " \u2022 {{ 0 <= a, b, c, d < n }}",
+      " \u2022 {{ a }}, {{ b }}, {{ c }}, and {{ d }} are distinct.",
+      " \u2022 {{ nums[a] + nums[b] + nums[c] + nums[d] == target }}",
+      "You may return the answer in any order."
+    ],
+    "examples": [
+      {
+        "input": "[1,0,-1,0,-2,2], 0",
+        "output": "[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]",
+        "explanations": [
+          "The input array is [1,0,-1,0,-2,2] and the target sum is 0. The output contains unique quadruplets that sum up to the target."
+        ]
+      }
+    ],
+    "constraints": [
+      "0 <= nums.length <= 200",
+      "-109 <= nums[i] <= 109",
+      "-109 <= target <= 109"
+    ],
+    "functionArguments": ["nums", "target"],
+    "hints": ["Sort the array first to make the solution more efficient."]
+  },
+  "testcases": [
+    {
+      "tid": "1",
+      "input": [[1, 0, -1, 0, -2, 2], 0],
+      "expected": [
+        [-2, -1, 1, 2],
+        [-2, 0, 0, 2],
+        [-1, 0, 0, 1]
+      ]
+    },
+    { "tid": "2", "input": [[2, 2, 2, 2, 2], 8], "expected": [[2, 2, 2, 2]] }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 1
+}

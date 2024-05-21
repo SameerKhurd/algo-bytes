@@ -1,0 +1,42 @@
+{
+  "question": {
+    "qid": "q_10128",
+    "diff": 1,
+    "tags": ["stack"],
+    "title": "Valid Parentheses",
+    "prompt": [
+      "Given a string {{ s }} containing just the characters {{ '(' }}, {{ ')' }}, {{ '{' }}, {{ '}' }}, {{ '[' }} and {{ ']' }}, determine if the input string is valid."
+    ],
+    "examples": [
+      {
+        "input": "'()'",
+        "output": "true",
+        "explanations": [
+          "The input string '()' is valid because the brackets are balanced."
+        ]
+      },
+      {
+        "input": "'([)]'",
+        "output": "false",
+        "explanations": [
+          "The input string '([)]' is not valid because the brackets are not balanced."
+        ]
+      }
+    ],
+    "constraints": [
+      "1 <= s.length <= 104",
+      "s consists of parentheses only: '()[]{}'"
+    ],
+    "functionArguments": ["s"],
+    "hints": ["Use a stack to keep track of opening brackets."]
+  },
+  "testcases": [
+    { "tid": "1", "input": ["()"], "expected": true },
+    { "tid": "3", "input": ["([)]"], "expected": false },
+    { "tid": "2", "input": ["()[]{}"], "expected": true },
+    { "tid": "4", "input": ["(([]){})"], "expected": true }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 3
+}

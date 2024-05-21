@@ -1,0 +1,46 @@
+{
+  "question": {
+    "qid": "q_10123",
+    "diff": 2,
+    "tags": ["Hash Table", "Two Pointers", "Sliding Window"],
+    "title": "Longest Substring Without Repeating Characters",
+    "prompt": [
+      "Given a string {{ s }}, find the length of the longest substring without repeating characters."
+    ],
+    "examples": [
+      {
+        "input": "\"abcabcbb\"",
+        "output": "3",
+        "explanations": ["The answer is \"abc\", with the length of 3."]
+      },
+      {
+        "input": "\"bbbbb\"",
+        "output": "1",
+        "explanations": ["The answer is \"b\", with the length of 1."]
+      },
+      {
+        "input": "\"pwwkew\"",
+        "output": "3",
+        "explanations": [
+          "The answer is \"wke\", with the length of 3. Note that the answer must be a substring, \"pwke\" is a subsequence and not a substring."
+        ]
+      }
+    ],
+    "constraints": [
+      "0 <= s.length <= 5 * 10^4",
+      "s consists of English letters, digits, symbols and spaces."
+    ],
+    "functionArguments": ["s"],
+    "hints": [
+      "Use a sliding window approach to keep track of the longest substring without repeating characters."
+    ]
+  },
+  "testcases": [
+    { "tid": "1", "input": ["abcabcbb"], "expected": 3 },
+    { "tid": "2", "input": ["bbbbb"], "expected": 1 },
+    { "tid": "3", "input": ["pwwkew"], "expected": 3 }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 3
+}

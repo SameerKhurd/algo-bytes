@@ -1,0 +1,36 @@
+{
+  "question": {
+    "qid": "q_10121",
+    "diff": 1,
+    "tags": ["Math"],
+    "title": "Palindrome Number",
+    "prompt": [
+      "Determine whether an integer {{ x }} is a palindrome. An integer is a palindrome when it reads the same backward as forward."
+    ],
+    "examples": [
+      {
+        "input": "121",
+        "output": "true",
+        "explanations": ["121 is a palindrome."]
+      },
+      {
+        "input": "-121",
+        "output": "false",
+        "explanations": ["-121 is not a palindrome."]
+      }
+    ],
+    "constraints": [
+      "Do not convert the integer to a string for solving the problem."
+    ],
+    "functionArguments": ["x"],
+    "hints": ["Think about how to reverse a number."]
+  },
+  "testcases": [
+    { "tid": "1", "input": [121], "expected": true },
+    { "tid": "2", "input": [-121], "expected": false },
+    { "tid": "3", "input": [10], "expected": false }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 5
+}

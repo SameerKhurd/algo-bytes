@@ -1,0 +1,37 @@
+{
+  "question": {
+    "qid": "q_10131",
+    "diff": 2,
+    "tags": ["Array", "Binary Search"],
+    "title": "Find Peak Element",
+    "prompt": [
+      "A peak element in an array is an element that is greater than its neighbors. Given an input array {{ nums }}, where {{ nums }}[{{ i }}] \u2260 {{ nums }}[{{ i + 1 }}] for all valid {{ i }}, find a peak element and return its index.",
+      "You may imagine that {{ nums[-1] = nums[n] = -\u221e }}. You must write an algorithm that runs in {{ O(log n) }} time complexity."
+    ],
+    "examples": [
+      {
+        "input": "[1,2,3,1]",
+        "output": "2",
+        "explanations": ["The output index 2 is the peak's index."]
+      },
+      {
+        "input": "[1,2,1,3,5,6,4]",
+        "output": "5",
+        "explanations": ["The output index 5 is the peak's index."]
+      }
+    ],
+    "constraints": [
+      "1 \u2264 nums.length \u2264 1000",
+      " nums[i] \u2260 nums[i+1] for all valid i "
+    ],
+    "functionArguments": ["nums"],
+    "hints": ["Try to solve it in O(log n) time complexity."]
+  },
+  "testcases": [
+    { "tid": "1", "input": [[1, 2, 3, 1]], "expected": 2 },
+    { "tid": "2", "input": [[1, 2, 1, 3, 5, 6, 4]], "expected": 5 }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 1
+}

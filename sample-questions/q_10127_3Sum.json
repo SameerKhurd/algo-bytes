@@ -1,0 +1,47 @@
+{
+  "question": {
+    "qid": "q_10127",
+    "diff": 2,
+    "tags": ["Array", "Two Pointers"],
+    "title": "3Sum",
+    "prompt": [
+      "Given an array of integers nums, and integer target, return all the unique triplets {{ [nums[i], nums[j], nums[k]] }} such that {{ i != j != k }} and {{  nums[i] + nums[j] + nums[k] == target }}.",
+      "Notice that the solution set must not contain duplicate triplets."
+    ],
+    "examples": [
+      {
+        "input": "[-1,0,1,2,-1,-4], 0",
+        "output": "[[-1,-1,2],[-1,0,1]]",
+        "explanations": [
+          "The sum of -1, 0, and 1 is 0, so [-1,0,1] is one possible triplet.",
+          "The sum of -1, -1, and 2 is 0, so [-1,-1,2] is another possible triplet."
+        ]
+      }
+    ],
+    "constraints": [
+      "3 <= nums.length <= 3000",
+      "-10^5 <= nums[i] <= 10^5",
+      "-10^5 <= target <= 10^5"
+    ],
+    "functionArguments": ["nums", "target"],
+    "hints": [
+      "Sort the array first to make it easier to find solutions.",
+      "Use a two-pointer approach to find the triplets."
+    ]
+  },
+  "testcases": [
+    {
+      "tid": "1",
+      "input": [[-1, 0, 1, 2, -1, -4], 0],
+      "expected": [
+        [-1, -1, 2],
+        [-1, 0, 1]
+      ]
+    },
+    { "tid": "2", "input": [[], 0], "expected": [] },
+    { "tid": "3", "input": [[0], 0], "expected": [] }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 3
+}

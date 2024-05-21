@@ -1,0 +1,42 @@
+{
+  "question": {
+    "qid": "q_10144",
+    "diff": 2,
+    "tags": ["Stack"],
+    "title": "Evaluate Reverse Polish Notation",
+    "prompt": [
+      " You are given an array of strings tokens that represents an arithmetic expression in a Reverse Polish Notation.",
+      "Evaluate the expression. Return an integer that represents the value of the expression.",
+      "Note that:",
+      " \u2022 The valid operators are {{ '+' }}, {{ '-' }}, {{ '*' }}, and {{ '/' }}.",
+      " \u2022 Each operand may be an integer or another expression.",
+      " \u2022 The division between two integers always truncates toward zero.",
+      " \u2022 There will not be any division by zero.",
+      " \u2022 The input represents a valid arithmetic expression in a reverse polish notation.",
+      " \u2022 The answer and all the intermediate calculations can be represented in a 32-bit integer."
+    ],
+    "examples": [
+      {
+        "input": "[\"2\", \"1\", \"+\", \"3\", \"*\"]",
+        "output": "9",
+        "explanations": ["((2 + 1) * 3) = 9"]
+      }
+    ],
+    "constraints": [
+      "The list of tokens is a valid Reverse Polish Notation expression.",
+      "The value of tokens is in the range [-10^4, 10^4].",
+      "Valid operators are '+', '-', '*', and '/'. Each token may be an integer or an operator."
+    ],
+    "functionArguments": ["tokens"],
+    "hints": [
+      "Use a stack to store operands, and pop operands from the stack when encountering an operator."
+    ]
+  },
+  "testcases": [
+    { "tid": "1", "input": [["2", "1", "+", "3", "*"]], "expected": 9 },
+    { "tid": "2", "input": [["4", "13", "5", "/", "+"]], "expected": 6 }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 3
+}

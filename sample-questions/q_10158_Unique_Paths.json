@@ -1,0 +1,52 @@
+{
+  "question": {
+    "qid": "q_10158",
+    "diff": 3,
+    "tags": ["Dynamic Programming"],
+    "title": "Unique Paths",
+    "prompt": [
+      "A robot is located at the top-left corner of a {{ m }} x {{ n }} {{ grid }} (marked 'Start' in the diagram below).",
+      "The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the {{ grid }} (marked 'Finish' in the diagram below).",
+      "Now consider if some obstacles are added to the grids. How many unique paths would there be?",
+      "An obstacle and space are marked as {{ 1 }} and {{ 0 }} respectively in the {{ grid }}."
+    ],
+    "examples": [
+      {
+        "input": "[[0,0,0],[0,1,0],[0,0,0]]",
+        "output": "2",
+        "explanations": [
+          "There is one obstacle in the middle of the 3x3 grid above. There are two ways to reach the bottom-right corner:"
+        ]
+      }
+    ],
+    "constraints": ["1 <= m, n <= 100", "grid[i][j] is 0 or 1."],
+    "functionArguments": ["grid"],
+    "hints": ["Dynamic Programming"]
+  },
+  "testcases": [
+    {
+      "tid": "1",
+      "input": [
+        [
+          [0, 0, 0],
+          [0, 1, 0],
+          [0, 0, 0]
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "tid": "2",
+      "input": [
+        [
+          [0, 1],
+          [0, 0]
+        ]
+      ],
+      "expected": 1
+    }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 5
+}

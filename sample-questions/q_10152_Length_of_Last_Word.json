@@ -1,0 +1,38 @@
+{
+  "question": {
+    "qid": "q_10152",
+    "diff": 1,
+    "tags": ["String"],
+    "title": "Length of Last Word",
+    "prompt": [
+      "Given a string {{ s }} consisting of upper/lower-case alphabets and empty space characters {{ ' ' }}, return the length of the last word (last word means the last appearing word if we loop from left to right) in the string.",
+      "If the last word does not exist, return {{ 0 }}."
+    ],
+    "examples": [
+      {
+        "input": "\"Hello World\"",
+        "output": "5",
+        "explanations": ["The last word is \"World\" which has a length of 5."]
+      },
+      {
+        "input": "\"Hello \"",
+        "output": "5",
+        "explanations": ["The last word is \"Hello\" which has a length of 5."]
+      }
+    ],
+    "constraints": [
+      "1 <= s.length <= 10^4",
+      "s consists of only English letters and spaces ' '.",
+      "There will be at least one word in s."
+    ],
+    "functionArguments": ["s"],
+    "hints": ["Traverse the string from right to left."]
+  },
+  "testcases": [
+    { "tid": "1", "input": ["Hello World"], "expected": 5 },
+    { "tid": "2", "input": ["Hello "], "expected": 5 }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 5
+}

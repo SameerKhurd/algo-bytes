@@ -1,0 +1,40 @@
+{
+  "question": {
+    "qid": "q_10147",
+    "diff": 1,
+    "tags": ["HashTable", "Math", "String"],
+    "title": "Valid Anagram",
+    "prompt": [
+      "Given two strings {{ s }} and {{ t }}, write a function to determine if {{ t }} is an anagram of {{ s }}.",
+      "You may assume the string contains only lowercase alphabetical characters."
+    ],
+    "examples": [
+      {
+        "input": "\"anagram\", \"nagaram\"",
+        "output": "true",
+        "explanations": ["\"nagaram\" is an anagram of \"anagram\"."]
+      },
+      {
+        "input": "\"rat\", \"car\"",
+        "output": "false",
+        "explanations": ["\"car\" is not an anagram of \"rat\"."]
+      }
+    ],
+    "constraints": [
+      "1 <= s.length, t.length <= 5 * 10^4",
+      "s and t consist of lowercase English letters."
+    ],
+    "functionArguments": ["s", "t"],
+    "hints": [
+      "What if the inputs contain Unicode characters? How would you adapt your solution to such case?",
+      "What if input strings contain whitespace characters?"
+    ]
+  },
+  "testcases": [
+    { "tid": "1", "input": ["\"anagram\"", "\"nagaram\""], "expected": true },
+    { "tid": "2", "input": ["\"rat\"", "\"car\""], "expected": false }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 5
+}

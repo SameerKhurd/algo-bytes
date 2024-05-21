@@ -1,0 +1,35 @@
+{
+  "question": {
+    "qid": "q_10137",
+    "diff": 1,
+    "tags": ["Bit Manipulation", "Hash Table"],
+    "title": "Single Number",
+    "prompt": [
+      "Given a non-empty array of integers {{ nums }}, every element appears twice except for one. Find that single one.",
+      "Follow up: Could you implement a solution with a linear runtime complexity and without using extra memory?"
+    ],
+    "examples": [
+      {
+        "input": "[2,2,1]",
+        "output": "1",
+        "explanations": ["1 is the only element that appears once."]
+      }
+    ],
+    "constraints": [
+      "1 <= nums.length <= 3 * 10^4",
+      "-3 * 10^4 <= nums[i] <= 3 * 10^4",
+      "nums.length is odd.",
+      "-10^9 <= nums[i] <= 10^9",
+      "Each element in the array appears twice except for one element which appears only once."
+    ],
+    "functionArguments": ["nums"],
+    "hints": [
+      "Try to use bitwise XOR operation.",
+      "Think about how XOR operation behaves when applied to the same number twice."
+    ]
+  },
+  "testcases": [{ "tid": "Example 1", "input": [[2, 2, 1]], "expected": 1 }],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 3
+}

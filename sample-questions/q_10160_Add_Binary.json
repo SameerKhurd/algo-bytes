@@ -1,0 +1,32 @@
+{
+  "question": {
+    "qid": "q_10160",
+    "diff": 1,
+    "tags": ["Math", "String"],
+    "title": "Add Binary",
+    "prompt": [
+      "Given two binary strings {{ a }} and {{ b }}, return their {{ sum }} as a binary string."
+    ],
+    "examples": [
+      {
+        "input": "'11', '1'",
+        "output": "'100'",
+        "explanations": ["11 + 1 = 100"]
+      }
+    ],
+    "constraints": [
+      "1 <= a.length, b.length <= 10^4",
+      "a and b consist only of '0' or '1' characters.",
+      "Each string does not contain leading zeros except for the zero itself."
+    ],
+    "functionArguments": ["a", "b"],
+    "hints": ["Bit Manipulation"]
+  },
+  "testcases": [
+    { "tid": "1", "input": ["11", "1"], "expected": "100" },
+    { "tid": "2", "input": ["1010", "1011"], "expected": "10101" }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 5
+}

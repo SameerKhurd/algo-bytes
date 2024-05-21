@@ -1,0 +1,54 @@
+{
+  "question": {
+    "qid": "q_10149",
+    "diff": 2,
+    "tags": ["String"],
+    "title": "Largest Number",
+    "prompt": [
+      "Given a list of non-negative integers {{ nums }}, arrange them such that they form the largest number and return it.",
+      "Since the result may be very large, so you need to return a string instead of an integer."
+    ],
+    "examples": [
+      {
+        "input": "[10,2]",
+        "output": "\"210\"",
+        "explanations": [
+          "The output \"210\" is the largest number that can be formed by concatenating \"10\" and \"2\"."
+        ]
+      },
+      {
+        "input": "[3,30,34,5,9]",
+        "output": "\"9534330\"",
+        "explanations": [
+          "The output \"9534330\" is the largest number that can be formed by concatenating \"3\", \"30\", \"34\", \"5\", and \"9\"."
+        ]
+      },
+      {
+        "input": "[1]",
+        "output": "\"1\"",
+        "explanations": [
+          "The output \"1\" is the largest number that can be formed by concatenating a single number, which is \"1\"."
+        ]
+      },
+      {
+        "input": "[10]",
+        "output": "\"10\"",
+        "explanations": [
+          "The output \"10\" is the largest number that can be formed by concatenating a single number, which is \"10\"."
+        ]
+      }
+    ],
+    "constraints": ["1 <= nums.length <= 100", "0 <= nums[i] <= 10^9"],
+    "functionArguments": ["nums"],
+    "hints": ["To compare two numbers, compare them as strings."]
+  },
+  "testcases": [
+    { "tid": "1", "input": [[10, 2]], "expected": "210" },
+    { "tid": "2", "input": [[3, 30, 34, 5, 9]], "expected": "9534330" },
+    { "tid": "3", "input": [[1]], "expected": "1" },
+    { "tid": "4", "input": [[10]], "expected": "10" }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 5
+}

@@ -1,0 +1,41 @@
+{
+  "question": {
+    "qid": "q_10145",
+    "diff": 2,
+    "tags": ["Dynamic Programming"],
+    "title": "Palindrome Partitioning II",
+    "prompt": [
+      "Given a string {{ s }}, partition {{ s }} such that every substring of the partition is a palindrome.",
+      "Return the minimum cuts needed for a palindrome partitioning of {{ s }}."
+    ],
+    "examples": [
+      {
+        "input": "\"aab\"",
+        "output": "1",
+        "explanations": [
+          "The palindrome partitioning [\"aa\",\"b\"] could be produced using 1 cut."
+        ]
+      },
+      {
+        "input": "\"a\"",
+        "output": "0",
+        "explanations": [
+          "The input string is already a palindrome, thus no cuts are needed."
+        ]
+      }
+    ],
+    "constraints": [
+      "1 <= s.length <= 2000",
+      "s consists of lower-case English letters only."
+    ],
+    "functionArguments": ["s"],
+    "hints": ["Dynamic Programming"]
+  },
+  "testcases": [
+    { "tid": "1", "input": ["aab"], "expected": 1 },
+    { "tid": "2", "input": ["a"], "expected": 0 }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 1
+}

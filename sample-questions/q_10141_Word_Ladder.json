@@ -1,0 +1,42 @@
+{
+  "question": {
+    "qid": "q_10141",
+    "diff": 3,
+    "tags": ["Breadth First Search"],
+    "title": "Word Ladder",
+    "prompt": [
+      "Given two words {{ beginWord }} and {{ endWord }}, and a dictionary's {{ wordList }}, find the length of shortest transformation sequence from {{ beginWord }} to {{ endWord }}, such that:",
+      "Only one letter can be changed at a time.",
+      "Each transformed word must exist in the word list. Note that {{ beginWord }} is not a transformed word."
+    ],
+    "examples": [
+      {
+        "input": "beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]",
+        "output": "5",
+        "explanations": [
+          "As one shortest transformation is \"hit\" -> \"hot\" -> \"dot\" -> \"dog\" -> \"cog\", return its length 5."
+        ]
+      }
+    ],
+    "constraints": [
+      "The length of beginWord and endWord will be in the range [1, 10].",
+      "The length of wordList will be in the range [1, 5000].",
+      "All words in wordList consist of lowercase English letters.",
+      "beginWord and endWord are distinct."
+    ],
+    "functionArguments": ["beginWord", "endWord", "wordList"],
+    "hints": [
+      "Instead of generating all possible transformations, we can reduce the problem by finding one transformation at a time."
+    ]
+  },
+  "testcases": [
+    {
+      "tid": "1",
+      "input": ["hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]],
+      "expected": 5
+    }
+  ],
+  "submitted": 0,
+  "accepted": 0,
+  "questionLevel": 3
+}
